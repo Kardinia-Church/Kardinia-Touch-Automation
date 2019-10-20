@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <section class="split" mode="all" showWhileLocked="yes">
+    <section class="split" mode="all" showWhileLocked="no">
         <h2>House Lights</h2>
         <aside class="split">
             <button name="commandButton" command="houseLights" value="6">100%</button>
@@ -15,7 +15,7 @@
         </aside> 
         <aside class="split"> 
             <button name="commandButton" command="houseLights" value="2">15%</button>
-            <button name="commandButton" command="houseLights" value="1">10%</button>
+            <button name="commandButton" command="houseLights" value="1">Rear Only</button>
             <button name="commandButton" command="houseLights" value="0">0%</button>
         </aside> 
     </section> 
@@ -34,9 +34,6 @@
             <button name="commandButton" command="frontWash" value="2">Full</button>
             <button name="commandButton" command="frontWash" value="1">Front Only</button>
             <button name="commandButton" command="frontWash" value="0">Off</button>
-            </br>
-            <button name="commandButton" command="lxControl" value="lampOn" replyNotRequired="yes" flash="yes">Lamp On</button>
-            <button name="commandButton" command="lxControl" value="lampOff" replyNotRequired="yes" flash="yes">Lamp Off</button>
         </aside>
     </section>
     <section class="split" mode="basic full event" showWhileLocked="no">
@@ -57,11 +54,12 @@
         </aside>
     </section>
     <section class="split" mode="all" showWhileLocked="no">
-        <h2>Other Lights</h2>
-        <aside class="split"></aside>
-            <button name="toggleCommandButton" command="backstageLights" values="0, 1, 2" colors="white, lightblue, silver">Backstage</button>
-            <button name="toggleCommandButton" command="workLights" values="0, 1" colors="white, silver">Work Lights</button>
+        <h2>Other</h2>
+        <aside class="split">
+            <button name="toggleCommandButton" command="backstageLights" values="0, 1, 2" colors="white, gray, silver">Backstage</button>
             <button name="toggleCommandButton" command="floorLights" values="0, 1" colors="white, silver">Floor Lights</button>
+            <button name="commandButton" command="lxControl" value="hazeOn" replyNotRequired="yes" flash="yes">Haze On</button>
+            <button name="commandButton" command="lxControl" value="hazeOff" replyNotRequired="yes" flash="yes">Haze Off</button>
         </aside>
     </section>
     <script src="../utility.js"></script>

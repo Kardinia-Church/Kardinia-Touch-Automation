@@ -17,9 +17,8 @@
     <section class="split" mode="all" showWhileLocked="no">
         <h2>Other</h2>
         <aside class="split">
-            <button onclick="changePage('advanced-atemControl');">ATEM Control</button>
-            <!-- <button onclick="window.location.href='./advanced-videoHubControl.html'">Routing</button> -->
-            <!-- <button onclick="window.location.href='./advanced-relayControl.html'">Relay Control</button> -->
+            <button name="commandButton" command="hdl" value="0" replyNotRequired="yes" flash="yes">Force AC to defaults</button>
+            <button name="toggleCommandButton" command="hdl" values="0, 1" colors="white, silver">Toliet PIR Lock</button>
             <button name="toggleCommandButton" command="hdlPanelLock" values="0, 1" colors="white, silver">Lock Wallpanels</button>
         </aside>
     </section>

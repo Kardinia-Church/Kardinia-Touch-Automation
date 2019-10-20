@@ -6,34 +6,43 @@
 </head>
 <body>
     <section class="split" mode="all" showWhileLocked="no">
-        <h2>Mode</h2>
+        <h2>Power</h2>
         <aside class="split">
-            <button name="commandButton" command="mode" value="full" ask="yes" askText="This will turn on all the equipment">Full</button>
-            <button name="commandButton" command="mode" value="basic" ask="yes" askText="This will turn on basic equipment perfect for simple events">Basic</button>
-            <button name="commandButton" command="mode" value="event" ask="yes" askText="This will turn on all equipment and setup a preprogrammed look">Event</button>
-            <button name="commandButton" command="mode" value="off" ask="yes" askText="This will turn off the system">Off</button>
+            <button name="changePageButton" page="scene"><i class="fas fa-calendar-plus"></i> Select Scene</button>
+            </br>
+            <button name="commandButton" command="mode" value="full" ask="yes" askText="This will turn on all the equipment and ACs. Including the cafe"><i class="fas fa-home"></i> Full</button>
+            <button name="commandButton" command="mode" value="basic" ask="yes" askText="This will turn on all equipment and ACs. Except the cafe"><i class="fas fa-tachometer-alt-slowest"></i> Basic</button>
+            <button name="commandButton" command="mode" value="roomOnly" ask="yes" askText="This will power sound on only"><i class="fas fa-headphones"></i> Room Only</button>
+            <button name="commandButton" command="mode" value="off" ask="yes" askText="This will turn off the system. Except the cafe"><i class="fas fa-toggle-off"></i> Off</button>
         </aside>
     </section>
     <section class="split" mode="all" showWhileLocked="no">
         <h2>Projectors</h2>
         <aside class="split">
-            <button name="commandButton" command="projectorPower" value="1" ask="yes" askText="This will turn on all projectors">On</button>
-            <button name="commandButton" command="projectorPower" value="0" ask="yes" askText="This will turn off all projectors">Off</button>
+            <button name="commandButton" command="projectorPower" value="1" passwordRequired="yes">On</button>
+            <button name="commandButton" command="projectorPower" value="0" passwordRequired="yes">Off</button>
         </aside>
     </section>
     <section class="split" mode="all" showWhileLocked="no">
         <h2>Sound</h2>
         <aside class="split">
-            <button name="commandButton" command="soundPower" value="1" ask="yes" askText="This will turn on the sound equipment">On</button>
-            <button name="commandButton" command="soundPower" value="0" ask="yes" askText="This will turn off the sound equipment">Off</button>
+            <button name="commandButton" command="soundPower" value="1" passwordRequired="yes">On</button>
+            <button name="commandButton" command="soundPower" value="0" passwordRequired="yes">Off</button>
         </aside>
     </section>
     <section class="split" mode="all" showWhileLocked="no">
         <h2>Lighting</h2>
         <aside class="split">
-            <button name="commandButton" command="lxPower" value="2" ask="yes" askText="This will turn on the lighting equipment including haze">All Gear</button>
-            <button name="commandButton" command="lxPower" value="1" ask="yes" askText="This will turn off advanced gear and turn on the basic gear only">Wash Only</button>
-            <button name="commandButton" command="lxPower" value="0" ask="yes" askText="This will turn off all the lighting equipment">All Off</button>
+            <button name="commandButton" command="lxPower" value="2" passwordRequired="yes">All</button>
+            <button name="commandButton" command="lxPower" value="1" passwordRequired="yes">Basic</button>
+            <button name="commandButton" command="lxPower" value="0" passwordRequired="yes">All Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Cafe</h2>
+        <aside class="split">
+            <button name="commandButton" command="cafePower" value="1" passwordRequired="yes">On</button>
+            <button name="commandButton" command="cafePower" value="0" passwordRequired="yes">Off</button>
         </aside>
     </section>
 
