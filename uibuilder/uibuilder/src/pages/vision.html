@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="../fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Auditorium -->
+    <section name="innerPage" page="Auditorium">
+        <section class="split" mode="all" showWhileLocked="no">
+            <h2>Macros</h2>
+            <aside class="split">
+                    <button name="macroButton" macro="0"></button>
+                    <button name="macroButton" macro="0"></button>
+                    <button name="macroButton" macro="0"></button>
+                    <button name="macroButton" macro="0"></button>
+            </aside>
+            <aside class="split">
+                <button name="macroButton" macro="0"></button>
+                <button name="macroButton" macro="0"></button>
+            </aside>
+        </section>
+        <section class="split" mode="all" showWhileLocked="no">
+            <h2>Side Input</h2>
+            <aside class="split">
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="keyerButton" keyerType="upstream" me="2" keyer="4">AV Key</button>
+            </aside>
+        </section>
+        <section class="split" mode="all" showWhileLocked="no">
+            <h2>Centre Input</h2>
+            <aside class="split">
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="keyerButton" keyerType="upstream" me="1" keyer="4">AV Key</button>
+            </aside>
+        </section>
+        <section class="split" mode="all" showWhileLocked="no">
+            <h2>Cafe Input</h2>
+            <aside class="split">
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+                <button name="programInputButton" me="2" input="0"></button>
+            </aside>
+            <aside class="split">
+                <button name="auxInputButton" aux="2" input="0"></button>
+                <button name="auxInputButton" aux="2" input="0"></button>
+            </aside>
+        </section>
+    </section>
+
+    <section id="pages">
+        <button name="changeInnerPageButton" class="onColor" onclick="changeInnerPage(event, 'auditorium')">Auditorium</button>
+        <button name="changeInnerPageButton" class="offColor" onclick="changeInnerPage(event, 'cameras')">Cameras</button>
+        <button name="changeInnerPageButton" class="offColor" onclick="changeInnerPage(event, 'liveStream')">Live Stream</button>
+        <button name="changeInnerPageButton" class="offColor" onclick="changeInnerPage(event, 'advanced')">Advanced</button>
+    </section>
+
+    <script src="../utility.js"></script>
+    <script src="../widgets.js"></script>
+    <script src="./script.js"></script>
+    <script src="./noscript.js"></script>
+</body>
+</html>

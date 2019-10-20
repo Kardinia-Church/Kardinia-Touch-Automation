@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="../fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Lighting Control</h2>
+        <aside class="split">
+            <button name="commandButton" command="lightingScene" value="workLights" replyNotRequired="yes" ask="yes" askText="This will override and set the stage to full white. Good for working on the stage">On Stage Worklights</button>
+            <button name="commandButton" command="lxControl" value="releaseAll" replyNotRequired="yes" ask="yes" askText="This will release all lighting turning it off">Release All</button>
+            <button name="commandButton" command="lxControl" value="dboOn" replyNotRequired="yes" ask="yes" askText="This will set lighting to 0%">DBO On</button>
+            <button name="commandButton" command="lxControl" value="dboOff" replyNotRequired="yes" ask="yes" askText="This will set lighting to 100%">DBO Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Other</h2>
+        <aside class="split">
+            <button onclick="changePage('advanced-atemControl');">ATEM Control</button>
+            <!-- <button onclick="window.location.href='./advanced-videoHubControl.html'">Routing</button> -->
+            <!-- <button onclick="window.location.href='./advanced-relayControl.html'">Relay Control</button> -->
+            <button name="toggleCommandButton" command="hdlPanelLock" values="0, 1" colors="white, silver">Lock Wallpanels</button>
+        </aside>
+    </section>
+
+    <script src="../utility.js"></script>
+    <script src="../widgets.js"></script>
+    <script src="./script.js"></script>
+    <script src="./noscript.js"></script>
+</body>
+</html>

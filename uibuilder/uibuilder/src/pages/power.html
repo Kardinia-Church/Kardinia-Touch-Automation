@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="../fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Mode</h2>
+        <aside class="split">
+            <button name="commandButton" command="mode" value="full" ask="yes" askText="This will turn on all the equipment">Full</button>
+            <button name="commandButton" command="mode" value="basic" ask="yes" askText="This will turn on basic equipment perfect for simple events">Basic</button>
+            <button name="commandButton" command="mode" value="event" ask="yes" askText="This will turn on all equipment and setup a preprogrammed look">Event</button>
+            <button name="commandButton" command="mode" value="off" ask="yes" askText="This will turn off the system">Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Projectors</h2>
+        <aside class="split">
+            <button name="commandButton" command="projectorPower" value="1" ask="yes" askText="This will turn on all projectors">On</button>
+            <button name="commandButton" command="projectorPower" value="0" ask="yes" askText="This will turn off all projectors">Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Sound</h2>
+        <aside class="split">
+            <button name="commandButton" command="soundPower" value="1" ask="yes" askText="This will turn on the sound equipment">On</button>
+            <button name="commandButton" command="soundPower" value="0" ask="yes" askText="This will turn off the sound equipment">Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Lighting</h2>
+        <aside class="split">
+            <button name="commandButton" command="lxPower" value="2" ask="yes" askText="This will turn on the lighting equipment including haze">All Gear</button>
+            <button name="commandButton" command="lxPower" value="1" ask="yes" askText="This will turn off advanced gear and turn on the basic gear only">Wash Only</button>
+            <button name="commandButton" command="lxPower" value="0" ask="yes" askText="This will turn off all the lighting equipment">All Off</button>
+        </aside>
+    </section>
+
+    <script src="../utility.js"></script>
+    <script src="../widgets.js"></script>
+    <script src="./script.js"></script>
+    <script src="./noscript.js"></script>
+</body>
+</html>
