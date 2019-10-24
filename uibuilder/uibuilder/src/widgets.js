@@ -2,7 +2,7 @@
 /**
  * The widgets file containing all the widgets avaliabile to the HTML
  * 
- * Version 1.0 Alpha
+ * Version 1.0
  */
 
 var widgets = {
@@ -53,7 +53,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -71,8 +71,8 @@ var widgets = {
                 //If a reply is not required from this button skip it
                 if(button.getAttribute("replyNotRequired") != "yes") {
                     //Add the command to the listener for incomplete data
-                    if(requiredInformation.includes(button.getAttribute("command")) == false && button.getAttribute("replyNotRequired") != "yes") {
-                        requiredInformation.push(button.getAttribute("command"));
+                    if(button.getAttribute("replyNotRequired") != "yes") {
+                        addRequiredInformation(button.getAttribute("command"), requiredInformation);
                     }
 
                     //Set the colour based on if it's command is set to it's value
@@ -261,7 +261,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -292,7 +292,7 @@ var widgets = {
 
             //Add the command to the listener for incomplete data
             if(requestMacroNames == true) {
-                requiredInformation.push("atemMacros");
+                addRequiredInformation("atemMacros", requiredInformation);
             }
         }
     },
@@ -372,7 +372,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -411,7 +411,7 @@ var widgets = {
 
             //Add the command to the listener for incomplete data
             if(requestKeyers == true) {
-                requiredInformation.push("atemKeyers");
+                addRequiredInformation("atemKeyers", requiredInformation);
             }
         }
     },
@@ -458,7 +458,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -481,9 +481,9 @@ var widgets = {
                 if(button.getAttribute("replyNotRequired") != "yes") {
                     //Set the colour based on if it's command is set to it's value
                     var value = undefined;
-                    try{value = JSON.parse(sessionStorage.getItem("atemProgramInputs"))[me];}catch(e){}
+                    try{value = JSON.parse(sessionStorage.getItem("atemProgramInputs"))[me]["inputNumber"];}catch(e){}
                     if(value !== undefined) {
-                        if(input == value) {
+                        if(parseInt(input) == parseInt(value)) {
                             button.classList.remove("offColor");
                             button.classList.add("onColor");
                         }
@@ -499,7 +499,7 @@ var widgets = {
 
                 //Set the button text if known
                 var name = null;
-                try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["name"];}catch(e){}
+                try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["longName"];}catch(e){}
             
                 //Set the button text to the macro name
                 if(name === null) {
@@ -513,12 +513,12 @@ var widgets = {
 
             //Add the command to the listener for incomplete data
             if(requestInputNames == true) {
-                requiredInformation.push("atemInputs");
+                addRequiredInformation("atemInputs", requiredInformation);
             }
            
             //Add the command to the listener for incomplete data
             if(requestProgramInputs == true) {
-                requiredInformation.push("atemProgramInputs");
+                addRequiredInformation("atemProgramInputs", requiredInformation);
             }
         }
     },
@@ -565,7 +565,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -620,12 +620,12 @@ var widgets = {
 
             //Add the command to the listener for incomplete data
             if(requestInputNames == true) {
-                requiredInformation.push("atemInputs");
+                addRequiredInformation("atemInputs", requiredInformation);
             }
            
             //Add the command to the listener for incomplete data
             if(requestProgramInputs == true) {
-                requiredInformation.push("atemPreviewInputs");
+                addRequiredInformation("atemPreviewInputs", requiredInformation);
             }
         }
     },
@@ -672,7 +672,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -695,9 +695,9 @@ var widgets = {
                 if(button.getAttribute("replyNotRequired") != "yes") {
                     //Set the colour based on if it's command is set to it's value
                     var value = undefined;
-                    try{value = JSON.parse(sessionStorage.getItem("atemAuxInputs"))[aux];}catch(e){}
+                    try{value = JSON.parse(sessionStorage.getItem("atemAuxInputs"))[aux]["inputNumber"];}catch(e){}
                     if(value !== undefined) {
-                        if(input == value["inputId"]) {
+                        if(parseInt(input) == parseInt(value)) {
                             button.classList.remove("offColor");
                             button.classList.add("onColor");
                         }
@@ -713,7 +713,7 @@ var widgets = {
 
                 //Set the button text if known
                 var name = null;
-                try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["name"];}catch(e){}
+                try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["longName"];}catch(e){}
             
                 //Set the button text to the macro name
                 if(name === null) {
@@ -727,12 +727,12 @@ var widgets = {
 
             //Add the command to the listener for incomplete data
             if(requestInputNames == true) {
-                requiredInformation.push("atemInputs");
+                addRequiredInformation("atemInputs", requiredInformation);
             }
            
             //Add the command to the listener for incomplete data
             if(requestProgramInputs == true) {
-                requiredInformation.push("atemAuxInputs");
+                addRequiredInformation("atemAuxInputs", requiredInformation);
             }
         }
     },
@@ -840,7 +840,7 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update(button, requiredInformation) {
+        update: function(button, requiredInformation) {
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -863,7 +863,7 @@ var widgets = {
                     colors = colors.replace(/\s/g,'').split(",");
                     var currentValue = sessionStorage.getItem(command);
                     if(currentValue == undefined || currentValue == null) {
-                        requiredInformation.push(command);
+                        addRequiredInformation(command, requiredInformation);
                     }
                     else {
                         //Find the index

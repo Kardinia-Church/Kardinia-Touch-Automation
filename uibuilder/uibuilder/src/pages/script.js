@@ -1,14 +1,13 @@
 /**
  * Main global script file for the inner website
  * 
- * Version 1.0 Alpha
+ * Version 1.0
  */
 
 var requiredInformation;
 
 function processGlobal() {
     requiredInformation = [];
-
     setWidgets();
     updatePage();
 
@@ -21,7 +20,7 @@ function processGlobal() {
         });
 
         updatePage();
-        setTimeout(function(){loadComplete(loaded)}, 1000);
+        setTimeout(function(){loadComplete(loaded)}, 0);
     });
 }
 
@@ -67,7 +66,7 @@ function ask(askText, callback, returnParam1) {
 }
 
 //Send a request to the server as {"command": "", "request", ""}, can be an array
-function sendRequest(json, passwordRequired = undefined, ask = undefined, askText = undefined) {
+function sendRequest(json, passwordRequired, ask, askText) {
     //If we have not been passed an array make it one
        if(Array.isArray(json) == false) {
         json = [json];

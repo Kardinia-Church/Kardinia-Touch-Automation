@@ -1,7 +1,7 @@
 /**
  * Main script file managing all global functionality of the outer website
  * 
- * Version 1.0 Alpha
+ * Version 1.0
  */
 
 var connectionState = true;
@@ -238,7 +238,7 @@ window.onload = function() {
     });
 
     //Request startup information
-    requestStatus(["mode", "password", "lock" + thisPanelName]);
+    requestStatus(["mode", "password", "lock"]);
 
     setTimeout(function(){
         if(connectionState == true && (sessionStorage.getItem("mode") == "unknown" || sessionStorage.getItem("mode") === undefined || sessionStorage.getItem("mode") === null)) {
@@ -477,7 +477,8 @@ function updatePage() {
 
 //Set the loading
 var loadingTimeout = undefined;
-function isLoading(loading, forceSet=false) {
+function isLoading(loading, forceSet) {
+    if(forceSet === undefined || forceSet === null){forceSet=false;}
     if(sessionStorage.getItem("loading") != loading || forceSet == true) {
         sessionStorage.setItem("loading", loading);
         if(loading == "yes") {
@@ -517,21 +518,23 @@ function lock(state) {
     }
 
     //We should lock
-    sessionStorage.setItem("locked", state);
-    if(state == true || state == "true" || state=="yes") {
-        changePage("home");
-        displayInformation("This panel is locked. Your actions have been limited.", "warning", true);
-        setElementsVisibility();
-    }
-    else {
-        changePage("home");
-        clearInformation();
-        setElementsVisibility();
+    if(sessionStorage.getItem("locked") != state) {
+        sessionStorage.setItem("locked", state);
+        if(state == true || state == "true" || state=="yes") {
+            changePage("home");
+            displayInformation("This panel is locked. Your actions have been limited.", "warning", true);
+            setElementsVisibility();
+        }
+        else {
+            changePage("home");
+            clearInformation();
+            setElementsVisibility();
+        }
     }
 }
 
 //Send a request to the server in form {"command": "", "value": ""}, can be an array
-function sendRequest(request, passwordRequired = undefined, ask = undefined, askText = undefined) {
+function sendRequest(request, passwordRequired, ask, askText) {
     //Send the command
     var process = function() {
         //If we have not been passed an array make it one
@@ -544,11 +547,10 @@ function sendRequest(request, passwordRequired = undefined, ask = undefined, ask
             "payload": request
         }
         uibuilder.send(msg);
-        console.log(msg);
 
         clearTimeout(waitingForResponse.request);
         waitingForResponse.request = setTimeout(function(){
-            displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error");
+            //displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error");
             clearTimeout(waitingForResponse.request);
             waitingForResponse.request = undefined;
         }, 5000);

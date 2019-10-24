@@ -8,24 +8,23 @@
     <section class="split" mode="all" showWhileLocked="no">
         <h2>House Lights</h2>
         <aside class="split">
-            <button name="commandButton" command="houseLights" value="6">100%</button>
-            <button name="commandButton" command="houseLights" value="5">75%</button>
-            <button name="commandButton" command="houseLights" value="4">50%</button>
-            <button name="commandButton" command="houseLights" value="3">25%</button>
+            <button name="commandButton" command="houseLights" value="7">100%</button>
+            <button name="commandButton" command="houseLights" value="6">75%</button>
+            <button name="commandButton" command="houseLights" value="5">50%</button>
+            <button name="commandButton" command="houseLights" value="4">25%</button>
         </aside> 
         <aside class="split"> 
-            <button name="commandButton" command="houseLights" value="2">15%</button>
-            <button name="commandButton" command="houseLights" value="1">Rear Only</button>
+            <button name="commandButton" command="houseLights" value="3">15%</button>
+            <button name="commandButton" command="houseLights" value="2">Rear Only</button>
+            <button name="commandButton" command="houseLights" value="1">Backstage Only</button>
             <button name="commandButton" command="houseLights" value="0">0%</button>
         </aside> 
     </section> 
-    <section class="split" mode="basic full event" showWhileLocked="no">
+    <section class="split" mode="all" showWhileLocked="no">
         <h2>Scenes</h2>
         <aside class="split">
             <button name="commandButton" command="lightingScene" value="Welcome Home HOLDING" replyNotRequired="yes" flash="yes">Welcome Home</button>
             <button name="commandButton" command="lightingScene" value="Event HOLDING" replyNotRequired="yes" flash="yes">Event</button>
-            <button name="commandButton" command="videoScene" value="" replyNotRequired="yes" flash="yes">Video</button>
-            <button name="commandButton" command="floorLightsScene" value="" replyNotRequired="yes" flash="yes">Floor Lights</button>
         </aside>
     </section>
     <section class="split" mode="all" showWhileLocked="no">
@@ -36,7 +35,7 @@
             <button name="commandButton" command="frontWash" value="0">Off</button>
         </aside>
     </section>
-    <section class="split" mode="basic full event" showWhileLocked="no">
+    <section class="split" mode="all" showWhileLocked="no">
         <h2>Colour</h2>
         <aside class="split">
             <button name="commandButton" command="stageColour" value="9" replyNotRequired="yes" flash="yes" style="background-color: #ff4d4d">Red</button>
@@ -57,7 +56,7 @@
         <h2>Other</h2>
         <aside class="split">
             <button name="toggleCommandButton" command="backstageLights" values="0, 1, 2" colors="white, gray, silver">Backstage</button>
-            <button name="toggleCommandButton" command="floorLights" values="0, 1" colors="white, silver">Floor Lights</button>
+            <button name="toggleCommandButton" command="floorWash" values="0, 1" colors="white, silver">Floor Lights</button>
             <button name="commandButton" command="lxControl" value="hazeOn" replyNotRequired="yes" flash="yes">Haze On</button>
             <button name="commandButton" command="lxControl" value="hazeOff" replyNotRequired="yes" flash="yes">Haze Off</button>
         </aside>

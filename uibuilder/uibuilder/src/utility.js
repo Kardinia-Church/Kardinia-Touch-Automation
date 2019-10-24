@@ -2,11 +2,12 @@
  * Utility Methods
  * Where functions that are referenced thoughout the site are defined
  * 
- * Version 1.0 Alpha
+ * Version 1.0
  */
 
 //Flash a button when clicked
-function flashButton(button, period=500) {
+function flashButton(button, period) {
+    if(period === undefined || period === null){period=500;}
     var backgroundColor = button.style.backgroundColor;
     button.style.backgroundColor = "";
     button.classList.remove("offColor");
@@ -34,7 +35,7 @@ function setWidgets() {
 function updateWidgets() {
     for(var key in widgets) {
         widgets[key].update(document.getElementsByName(key), requiredInformation);
-    }  
+    }
 }
 
 //Go though all the elements and set their visibilty based on mode and lock status
@@ -103,7 +104,8 @@ function setElementsVisibility() {
 
 //Hide / show a element with fading
 var clearHideShowElementTimeout = undefined;
-function hideShowElement(element, state, period=500) {
+function hideShowElement(element, state, period) {
+    if(period === undefined || period === null){period=500;}
     clearTimeout(clearHideShowElementTimeout);
     element.style.transition = "opacity linear " + period + "ms";
     if(state == true) {
@@ -163,10 +165,19 @@ function checkInformation(loadedCallback) {
     }
 }
 
+//Add a required information to request to the buffer
+function addRequiredInformation(informationToAdd, information) {
+    //Only add it if its not required
+    if(information.indexOf(informationToAdd) == -1) {
+        information.push(informationToAdd);
+    }
+}
+
 //Detect if the user is holding a button
 var buttonHeld = false;
 var buttonHeldTimeout = undefined;
-function pressHoldButton(buttonDown, callback, time=1000) {
+function pressHoldButton(buttonDown, callback, time) {
+    if(time === undefined || time === null){time=1000;}
     if(callback == undefined || callback == null) {
         buttonHeld = buttonDown;
         if(buttonHeld == false){clearTimeout(buttonHeldTimeout);}
