@@ -1,7 +1,7 @@
 /*
     Main CSS file for the internal website
 
-    Version: 1.0 Alpha
+    Version: 1.1
 */
 
 html {
@@ -28,7 +28,7 @@ p {
 }
 h1 {
     margin: 1vh 0 0 0;
-    font-size: 1vw; 
+    font-size: 4vw; 
 }
 h2 {
     margin: 1vh 0 0 0;
@@ -68,6 +68,27 @@ h2 {
 }
 .split h2 {
     margin-bottom: 2vh;
+}
+.acPanel {
+    min-width: 18vw;
+    margin: 0;
+    text-align: center;
+}
+.acPanel h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 1vw;
+}
+.acPanel h2 {
+    font-size: 2vw;
+    margin: 0;
+    padding: 0;
+}
+.acPanel button {
+    width: 5vw;
+    height: 10vh;
+    display: block;
+    border-radius: 5px;
 }
 .onColor {
     background-color: silver;

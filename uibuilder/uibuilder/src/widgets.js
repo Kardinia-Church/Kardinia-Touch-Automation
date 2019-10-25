@@ -2,7 +2,7 @@
 /**
  * The widgets file containing all the widgets avaliabile to the HTML
  * 
- * Version 1.0
+ * Version 1.1
  */
 
 var widgets = {
@@ -878,6 +878,157 @@ var widgets = {
                     }
                 }
             }
+        }
+    },
+
+    "acControl": {
+        //Set the widget
+        set: function(section) {
+            //If a array is passed add them. If one item is passed add it
+            var sections = [];
+            try {
+                for(var i = 0; i < section.length; i++) {
+                    sections.push(section[i]);
+                }
+            }
+            catch(e){sections.push(section);}
+
+            //Loop though all the sections and generate them adding their actions
+            for(var i = 0; i < sections.length; i++) {
+                section = sections[i];
+                var acName = section.getAttribute("acName");
+                var acTitle = section.getAttribute("acTitle");
+                var acFeatures = section.getAttribute("features").toLowerCase();
+
+                if(acName !== undefined && acName !== null && acFeatures !== undefined && acFeatures !== null) {
+                    //AC is valid generate it
+                    acFeatures = acFeatures.split(" ");
+                    if(acFeatures.length <= 0) {console.log("ERROR: AC " + acName + " has no features so it was not added");}
+                    else {
+                        var title =  acName.charAt(0).toUpperCase() + acName.slice(1).toLowerCase();
+                        if(acTitle !== undefined && acTitle !== null){title = acTitle;}
+
+                        section.innerHTML += "<h2>" + title + "</h2>";
+                        if(acFeatures.includes("temp")) {
+                            section.innerHTML += "<h1 name='temp' ac='" + acName + "'>--</h1>";
+                        }
+                        if(acFeatures.includes("power")) {
+                            section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "' style='width: 18vw; height: 8vh;'>Power</button>";
+                        }
+
+                        var tableHTML = "<table class='acPanel'>";
+
+                        //Add the ac features
+                        for(var j = 0; j < acFeatures.length; j++) {
+                            switch(acFeatures[j]) {
+                                case "settemp": {
+                                    tableHTML += "<tr>";
+                                    tableHTML += "<td><button name='acAction' action='setTemp' value='down' acname='" + acName + "'>-</button></td>";
+                                    tableHTML += "<td><h3>Temperature</h3><h2>--</h2></td>";
+                                    tableHTML += "<td><button name='acAction' action='setTemp' value='up' acname='" + acName + "'>+</button></td>";
+                                    tableHTML += "</tr>";
+                                    break;
+                                }
+                                case "mode": {
+                                    tableHTML += "<tr>";
+                                    tableHTML += "<td><button name='acAction' action='setMode' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></td>";
+                                    tableHTML += "<td><h3>Mode</h3><h2>--</h2></td>";
+                                    tableHTML += "<td><button name='acAction' action='setMode' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></td>";
+                                    tableHTML += "</tr>";
+                                    break;
+                                }
+                                case "fan": {
+                                    tableHTML += "<tr>";
+                                    tableHTML += "<td><button name='acAction' action='setFan' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></td>";
+                                    tableHTML += "<td><h3>Fan</h3><h2>--</h2></td>";
+                                    tableHTML += "<td><button name='acAction' action='setFan' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></td>";
+                                    tableHTML += "</tr>";
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    tableHTML += "</table>";
+                    section.innerHTML += tableHTML;
+                }
+            }
+        },
+
+        //Update the widget based on values
+        update: function(button, requiredInformation) {
+        }
+    },
+
+    "acAction": {
+        //Set the widget
+        set: function(button) {
+            //If a array is passed add them. If one item is passed add it
+            var buttons = [];
+            try {
+                for(var i = 0; i < button.length; i++) {
+                    buttons.push(button[i]);
+                }
+            }
+            catch(e){buttons.push(button);}
+
+            //Loop though all the buttons and add their actions
+            for(var i = 0; i < buttons.length; i++) {
+                button = buttons[i];
+                button.onclick = function() {
+                    // //When clicked send the command
+                    var button = this;
+
+                    var action = button.getAttribute("action");
+                    var value = button.getAttribute("value");
+                    var acName = button.getAttribute("acname");
+
+                    if(action !== undefined && action !== null && value !== undefined && value !== null && acName !== undefined && acName !== null) {
+                        var acNames = acName.split(" ");
+                        
+                        var ask = button.getAttribute("ask");
+                        var askText = button.getAttribute("askText");
+                        var passwordRequired = button.getAttribute("passwordRequired");
+                        var request = [];
+
+                        //Generate command
+                        for(var j = 0; j < acNames.length; j++) {
+                            if(action.split(" ").length == value.split(" ").length) {
+                                for(var k = 0; k < action.split(" ").length; k++) {
+                                    request.push({
+                                        "command": "acAction",
+                                        "value": {
+                                            "acName": acNames[j],
+                                            "action": action.split(" ")[k],
+                                            "value": value.split(" ")[k]
+                                        }
+                                    });
+                                }
+                            }
+                            else{console.log("Error: Invalid AC action, the actions and values need to line up");}
+                        }
+
+                        if(passwordRequired == "yes") {
+                            sendRequest(request, true);
+                        }
+                        else if(ask == "yes") {
+                            sendRequest(request, false, true, askText);
+                        }
+                        else {
+                            sendRequest(request);
+                        }
+                    }
+
+                    //Should the button flash?
+                    if(button.getAttribute("flash") != "no") {
+                        flashButton(button);
+                    }
+                }
+            }
+        },
+
+        //Update the widget based on values
+        update: function(button, requiredInformation) {
         }
     },
 }

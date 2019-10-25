@@ -51,6 +51,28 @@
             <button name="commandButton" command="frontWash" value="0">Off</button>
         </aside>
     </section>
+
+
+    <section name="acControl" acName="auditorium cafe" acTitle="All ACs" features="temp setTemp mode fan power" class="split" mode="all" showWhileLocked="no"></section> 
+
+    <button name="acAction" acName="auditorium cafe" action="power setTemp setMode setFan" value="on 21 auto auto">Test</button>
+
+    <section class="split" mode="all" showWhileLocked="no">
+            <h2>House Lights</h2>
+            <aside class="split">
+                <button name="commandButton" command="houseLights" value="7">100%</button>
+                <button name="commandButton" command="houseLights" value="6">75%</button>
+                <button name="commandButton" command="houseLights" value="5">50%</button>
+                <button name="commandButton" command="houseLights" value="4">25%</button>
+            </aside> 
+            <aside class="split"> 
+                <button name="commandButton" command="houseLights" value="3">15%</button>
+                <button name="commandButton" command="houseLights" value="2">Rear Only</button>
+                <button name="commandButton" command="houseLights" value="1">Backstage Only</button>
+                <button name="commandButton" command="houseLights" value="0">0%</button>
+            </aside> 
+        </section> 
+
     <!-- <section class="split" mode="2 3" showWhileLocked="no">
         <h2>Colour</h2>
         <aside class="split">
