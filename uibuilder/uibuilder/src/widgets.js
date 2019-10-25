@@ -910,7 +910,7 @@ var widgets = {
 
                         section.innerHTML += "<h2>" + title + "</h2>";
                         if(acFeatures.includes("temp")) {
-                            section.innerHTML += "<h1 name='temp' ac='" + acName + "'>--</h1>";
+                            section.innerHTML += "<h1 name='acValue' acname='" + acName + "' type='temp'>--</h1>";
                         }
                         if(acFeatures.includes("power")) {
                             section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "' style='width: 18vw; height: 8vh;'>Power</button>";
@@ -924,7 +924,7 @@ var widgets = {
                                 case "settemp": {
                                     tableHTML += "<tr>";
                                     tableHTML += "<td><button name='acAction' action='setTemp' value='down' acname='" + acName + "'>-</button></td>";
-                                    tableHTML += "<td><h3>Temperature</h3><h2>--</h2></td>";
+                                    tableHTML += "<td><h3>Temperature</h3><h2 name='acValue' type='setTemp' acName='" + acName + "'>--</h2></td>";
                                     tableHTML += "<td><button name='acAction' action='setTemp' value='up' acname='" + acName + "'>+</button></td>";
                                     tableHTML += "</tr>";
                                     break;
@@ -932,7 +932,7 @@ var widgets = {
                                 case "mode": {
                                     tableHTML += "<tr>";
                                     tableHTML += "<td><button name='acAction' action='setMode' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></td>";
-                                    tableHTML += "<td><h3>Mode</h3><h2>--</h2></td>";
+                                    tableHTML += "<td><h3>Mode</h3><h2 name='acValue' type='mode' acName='" + acName + "'>--</h2></td>";
                                     tableHTML += "<td><button name='acAction' action='setMode' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></td>";
                                     tableHTML += "</tr>";
                                     break;
@@ -940,7 +940,7 @@ var widgets = {
                                 case "fan": {
                                     tableHTML += "<tr>";
                                     tableHTML += "<td><button name='acAction' action='setFan' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></td>";
-                                    tableHTML += "<td><h3>Fan</h3><h2>--</h2></td>";
+                                    tableHTML += "<td><h3>Fan</h3><h2 name='acValue' type='fan' acName='" + acName + "'>--</h2></td>";
                                     tableHTML += "<td><button name='acAction' action='setFan' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></td>";
                                     tableHTML += "</tr>";
                                     break;
@@ -956,7 +956,64 @@ var widgets = {
         },
 
         //Update the widget based on values
-        update: function(button, requiredInformation) {
+        update: function(section, requiredInformation) {
+            //If a array is passed add them. If one item is passed add it
+            var sections = [];
+            try {
+                for(var i = 0; i < section.length; i++) {
+                    sections.push(section[i]);
+                }
+            }
+            catch(e){sections.push(section);}
+
+            // //Loop though all the sections and update their information
+            // for(var i = 0; i < sections.length; i++) {
+            //     var section = sections[i];
+            //     var acName = section.getAttribute("acName");
+            //     var acFeatures = section.getAttribute("features").toLowerCase();
+
+            //     if(acName !== undefined && acName !== null && acFeatures !== undefined && acFeatures !== null) {
+            //        for(var j = 0; j < section.getElementsByTagName("h2").length; j++) {
+            //             switch(section.getElementsByTagName("h2").getAttribute("type")) {
+            //                 case "setTemp": {
+            //                     break;
+            //                 }
+            //             }
+            //        }
+            //     }
+            // }
+
+
+
+
+            // //Loop though all the buttons and set their colours
+            // for(var i = 0; i < buttons.length; i++) {
+            //     button = buttons[i];
+            //     var command = button.getAttribute("command");
+            //     var values = button.getAttribute("values");
+            //     var colors = button.getAttribute("colors");
+
+            //     //If the requied parameters are set
+            //     if(command !== undefined && command !== null && values !== undefined && values !== null && colors !== undefined && colors !== null) {
+            //         values = values.replace(/\s/g,'').split(",");
+            //         colors = colors.replace(/\s/g,'').split(",");
+            //         var currentValue = sessionStorage.getItem(command);
+            //         if(currentValue == undefined || currentValue == null) {
+            //             addRequiredInformation(command, requiredInformation);
+            //         }
+            //         else {
+            //             //Find the index
+            //             var index = 0;
+            //             for(var j = 0; j < values.length; j++) {
+            //                 if(values[j] == currentValue) {
+            //                     index = j;
+            //                     break;
+            //                 }
+            //             }
+            //             button.style.backgroundColor = colors[index];
+            //         }
+            //     }
+            // }
         }
     },
 
@@ -1029,6 +1086,138 @@ var widgets = {
 
         //Update the widget based on values
         update: function(button, requiredInformation) {
+        }
+    },
+
+    "acValue": {
+        //Set the widget
+        set: function(element) {
+            //If a array is passed add them. If one item is passed add it
+            var elements = [];
+            try {
+                for(var i = 0; i < element.length; i++) {
+                    elements.push(element[i]);
+                }
+            }
+            catch(e){elements.push(element);}
+
+            //Set default values
+            for(var i = 0; i < elements.length; i++) {
+                var acName = elements[i].getAttribute("acname");
+                var type = elements[i].getAttribute("type");
+
+                if(acName !== undefined && acName !== null && type !== undefined && type !== null) { 
+                    elements[i].innerHTML = "-";
+                }
+            }
+        },
+
+        //Update the widget based on values
+        update: function(element, requiredInformation) {
+            //If a array is passed add them. If one item is passed add it
+            var elements = [];
+            try {
+                for(var i = 0; i < element.length; i++) {
+                    elements.push(element[i]);
+                }
+            }
+            catch(e){elements.push(element);}
+
+            //Set default values
+            for(var i = 0; i < elements.length; i++) {
+                var acName = elements[i].getAttribute("acname");
+                var type = elements[i].getAttribute("type");
+
+                if(acName !== undefined && acName !== null && type !== undefined && type !== null) {
+
+                    //Attempt to get the values from storage
+                    var acs = undefined;
+                    var temp = "-";
+                    var setTemp = "-";
+                    var mode = "-";
+                    var fan = "-";
+                    var power = "-";
+                    try{
+                        acs = JSON.parse(sessionStorage.getItem("acValues"));
+                        if(acName.split(" ").length > 1) {
+                            //Loop though all the acs and check if the values are the same and set the value accordingly
+                            var isSame = true;
+                            var avgValue = 0;
+
+                            //Temp
+                            avgValue = 0;
+                            for(var j = 0; j < acName.split(" ").length; j++) {
+                                avgValue += acs[acName.split(" ")[j]].temp;
+                            }
+                            temp = (avgValue / acName.split(" ").length);  
+
+                            //Set temp
+                            isSame = true;
+                            for(var j = 1; j < acName.split(" ").length; j++) {
+                                if(acs[acName.split(" ")[j - 1]].setTemp != acs[acName.split(" ")[j]].setTemp){isSame = false; break;}
+                            }
+                            if(isSame == true){setTemp = acs[acName.split(" ")[j - 1]].setTemp;}else{setTemp = "~";}
+                            
+                            //Mode
+                            isSame = true;
+                            for(var j = 1; j < acName.split(" ").length; j++) {
+                                if(acs[acName.split(" ")[j - 1]].mode != acs[acName.split(" ")[j]].mode){isSame = false; break;}
+                            }
+                            if(isSame == true){mode = acs[acName.split(" ")[j - 1]].mode;}else{mode = "Varies";}
+                            
+                            //Fan
+                            isSame = true;
+                            for(var j = 1; j < acName.split(" ").length; j++) {
+                                if(acs[acName.split(" ")[j - 1]].fan != acs[acName.split(" ")[j]].fan){isSame = false; break;}
+                            }
+                            if(isSame == true){fan = acs[acName.split(" ")[j - 1]].fan;}else{fan = "Varies";}
+                        }
+                        else {
+                            //We only have one ac just set the values
+                            temp = acs[acName.split(" ")].temp;
+                            setTemp = acs[acName.split(" ")].setTemp;
+                            mode = acs[acName.split(" ")].mode;
+                            fan = acs[acName.split(" ")].fan;
+                            power = acs[acName.split(" ")].power;
+                        }
+                    }
+                    catch(e){addRequiredInformation("acValues", requiredInformation);};
+
+                    
+                    switch(type.toLowerCase()) {
+                        case "temp": {
+                            if(temp != "-") {
+                                elements[i].innerHTML = temp + "&#176;C";
+                            } else {elements[i].innerHTML = "-";}
+                            break;
+                        }
+                        case "settemp": {
+                            if(setTemp != "-") {
+                                elements[i].innerHTML = setTemp + "&#176;C";
+                            } else {elements[i].innerHTML = "-";}
+                            break;
+                        }
+                        case "mode": {
+                            if(mode != "-") {
+                                elements[i].innerHTML = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase();
+                            } else {elements[i].innerHTML = "-";}
+                            break;
+                        }
+                        case "fan": {
+                            if(fan != "-") {
+                                elements[i].innerHTML = fan.charAt(0).toUpperCase() + fan.slice(1).toLowerCase();
+                            } else {elements[i].innerHTML = "-";}
+                            break;
+                        }
+                        case "power": {
+                            if(power != "-") {
+                                elements[i].innerHTML = power.charAt(0).toUpperCase() + power.slice(1).toLowerCase();
+                            } else {elements[i].innerHTML = "-";}
+                            break;
+                        }
+                    }
+                }
+            }
         }
     },
 }

@@ -435,7 +435,7 @@
   },
   "node-red-contrib-uibuilder": {
    "name": "node-red-contrib-uibuilder",
-   "version": "2.0.1",
+   "version": "2.0.2",
    "local": true,
    "nodes": {
     "uibuilder": {
@@ -448,8 +448,7 @@
      "module": "node-red-contrib-uibuilder",
      "file": "\\Users\\hayden\\.node-red\\node_modules\\node-red-contrib-uibuilder\\nodes\\uibuilder.js"
     }
-   },
-   "pending_version": "2.0.2"
+   }
   },
   "node-red-node-sentiment": {
    "name": "node-red-node-sentiment",

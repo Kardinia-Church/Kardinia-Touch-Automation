@@ -22,3 +22,8 @@ A button to perform an action on a ac(s)
 It is also valid to do multiple actions across multiple acs shown below. Make sure that the action and values line up with spaces
 ```<button name="acAction" acName="auditorium cafe" action="power setTemp setMode setFan" value="on 21 auto auto">Set ACs</button>```
 
+## acValue
+Sets a ac value to a element
+```<h1 name="acValue" type="temp" acname="auditorium"></h1>```
+- type is the type to display (temp, setTemp, mode, fan, power)
+- acname is the ac name (supports multiple)
