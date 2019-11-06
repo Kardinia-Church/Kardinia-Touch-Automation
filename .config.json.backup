@@ -510,6 +510,25 @@
      "file": "C:\\Users\\hayden\\AppData\\Roaming\\npm\\node_modules\\blackmagic-atem-nodered\\atem.js"
     }
    }
+  },
+  "node-red-contrib-sensibo": {
+   "name": "node-red-contrib-sensibo",
+   "version": "0.3.1",
+   "local": false,
+   "nodes": {
+    "sensibo": {
+     "name": "sensibo",
+     "types": [
+      "sensibo-config",
+      "sensibo in",
+      "sensibo send"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "node-red-contrib-sensibo",
+     "file": "\\Users\\hayden\\.node-red\\node_modules\\node-red-contrib-sensibo\\sensibo.js"
+    }
+   }
   }
  },
  "_credentialSecret": "93f29e2f8ec60b1708324ba911b6d5ac7fd67d4e342c7fdc58ff519d3eb7d4b9",
