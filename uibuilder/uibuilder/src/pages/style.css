@@ -1,7 +1,7 @@
 /*
     Main CSS file for the internal website
 
-    Version: 1.1
+    Version: 1.2
 */
 
 html {
@@ -18,7 +18,7 @@ button {
     border-radius: 5px;
     margin: 0.5vw;
     padding: 0;
-    font-size: 1.7vw;
+    font-size: 1.5vw;
     font-weight: 600;
     transition: 0.1s;
 }
@@ -136,8 +136,9 @@ h2 {
     }
     #pages button {
         height: 10vw;
-        width: 23vw;
+        width: 15vw;
         margin: 0.1vw;
+        font-size: 2vw;
     }
     .split {
         width: 45vw;

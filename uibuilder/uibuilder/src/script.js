@@ -550,7 +550,12 @@ function sendRequest(request, passwordRequired, ask, askText) {
 
         clearTimeout(waitingForResponse.request);
         waitingForResponse.request = setTimeout(function(){
-            //displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error");
+            
+            
+            displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error");
+            
+            
+            
             clearTimeout(waitingForResponse.request);
             waitingForResponse.request = undefined;
         }, 5000);

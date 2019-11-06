@@ -14,6 +14,13 @@ window.onload = function() {
         upstreamKeyers = JSON.parse(upstreamKeyers);
         inputs = JSON.parse(inputs);
 
+        //Request information
+        if(programMEs == null || programMEs == undefined){requestStatus("atemProgramInputs");}
+        if(auxInputs == null || auxInputs == undefined){requestStatus("atemAuxInputs");}
+        if(downstreamKeyers == null || downstreamKeyers == undefined){requestStatus("atemDownstreamKeyers");}
+        if(upstreamKeyers == null || upstreamKeyers == undefined){requestStatus("atemUpstreamKeyers");}
+        if(inputs == null || inputs == undefined){requestStatus("atemInputs");}
+
         //Draw the MEs
         var programMELength = -1;
         for(var key in programMEs) {programMELength++;}
@@ -57,27 +64,18 @@ window.onload = function() {
             document.getElementById("generatedAtemSwitcherContent").innerHTML = html;
             document.getElementById("0").style.display = "block";
             document.getElementById("button0").className += " onColor";
-            setWidgets();
-            updatePage();
-
-            window.addEventListener("storage", function(e) {
-                if(e.storageArea == this.sessionStorage) {
-                    updatePage();
-                }
-            });
         }
         else {
             requestStatus(["atemProgramInputs", "atemKeyers", "atemAuxInputs", "atemInputs"]);
-            setTimeout(function() {location.reload();}, 1000);
+            isLoading(true);
+            location.reload();
         }
+
+        processGlobal();
     }
     catch(e) {
         console.log(e);
     }
-}
-
-function updatePage() {
-    updateWidgets();
 }
 
 //Change the selected ME

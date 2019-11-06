@@ -157,6 +157,8 @@ function checkInformation(loadedCallback) {
             }, 100);
         }
         else if(checkInformationRetries > 20){
+            console.log("Failed to gather information");
+            console.log(askForInformation);
             checkInformationRetries = 0;
             clearInterval(checkInformationInterval);
             checkInformationInterval = undefined;
