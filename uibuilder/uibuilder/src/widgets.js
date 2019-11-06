@@ -2,7 +2,7 @@
 /**
  * The widgets file containing all the widgets avaliabile to the HTML
  * 
- * Version 1.1
+ * Version 1.2
  */
 
 var widgets = {
@@ -340,40 +340,56 @@ var widgets = {
                         var askText = button.getAttribute("askText");
                         var passwordRequired = button.getAttribute("passwordRequired");
                         var value = undefined;
-                        try{value = JSON.parse(sessionStorage.getItem("atemKeyers"))[keyerType][me][keyer];}catch(e){}
-                        var json = {"command": "atemKeyers", "value": undefined};
-                        if(buttonHeldDown == true) {
-                            json.value = {"keyerType":keyerType, "keyer": keyer, "me": me, "value": 0}
-                            buttonHeldDown = false;
-                        }
-                        else {
-                            json.value = {"keyerType":keyerType, "keyer": keyer, "me": me, "value": !value};
-                        }
+                        var type = "";
+                        if(keyerType == "downstream") {type = "atemDownstreamKeyers";}
+                        else {type = "atemUpstreamKeyers";}
+                        try{value = JSON.parse(sessionStorage.getItem(type))[parseInt(me)*10 + parseInt(keyer)];}catch(e){}
 
-                        if(json.value.value != undefined && json.value.value != null) {
-                            //If we should ask before performing a command
-                            if(passwordRequired == "yes") {
-                                sendRequest(json, true);
-                            }
-                            else if(ask == "yes") {
-                                sendRequest(json, false, true, askText);
+                        if(value !== undefined && value !== null) {
+                            var json = {"command": type, "value": undefined};
+                            if(buttonHeldDown == true) {
+                                json.value = {"keyer": keyer, "me": me, "value": 0}
+                                buttonHeldDown = false;
                             }
                             else {
-                                sendRequest(json);
+                                json.value = {"keyer": keyer, "me": me, "value": !value.state};
                             }
-                        }
-                        else {
-                            displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                            requestStatus("atemKeyers");
+
+                            if(json.value.value != undefined && json.value.value != null) {
+                                //If we should ask before performing a command
+                                if(passwordRequired == "yes") {
+                                    sendRequest(json, true);
+                                }
+                                else if(ask == "yes") {
+                                    sendRequest(json, false, true, askText);
+                                }
+                                else {
+                                    sendRequest(json);
+                                }
+                            }
+                            else {
+                                displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                requestStatus("atemKeyers");
+                            }
                         }
                     }
                 }
+
+                //Set button text
+                var keyerType = button.getAttribute("keyerType");
+                var keyer = button.getAttribute("keyer");
+                var me = button.getAttribute("me");
+                var displayMe = button.getAttribute("displayMeInName");
+                if(keyerType == "downstream") {button.innerHTML = "DS";}
+                else {button.innerHTML = "US";}
+                button.innerHTML +=(parseInt(keyer) + 1);
+                if(displayMe == "yes") {button.innerHTML += " ME" + (parseInt(me) + 1);}
             }
         },
 
         //Update the widget based on values
         update: function(button, requiredInformation) {
-           //If a array is passed add them. If one item is passed add it
+            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
                for(var i = 0; i < button.length; i++) {
@@ -392,15 +408,22 @@ var widgets = {
                 var me = button.getAttribute("me");
                 
                 //Set the colour based on if it's command is set to it's value
-                var value = JSON.parse(sessionStorage.getItem("atemKeyers"));
-                try{value = value[keyerType][me][keyer];}catch(e){value = undefined;}
+                var type = "";
+                if(keyerType == "downstream") {type = "atemDownstreamKeyers";}
+                else {type = "atemUpstreamKeyers";}
+                var value = null;
+                try{
+                    value = JSON.parse(sessionStorage.getItem(type));
+                    value = value[(parseInt(me)*10) + parseInt(keyer)];
+                }catch(e){value = undefined;}
+
                 if(value !== undefined && value !== null) {
-                    if(value == true || value == 1) {
+                    if(value.state == true || value.state == 1) {
                         button.classList.remove("offColor");
-                        button.classList.add("onColor");
+                        button.classList.add("liveColor");
                     }
                     else {
-                        button.classList.remove("onColor");
+                        button.classList.remove("liveColor");
                         button.classList.add("offColor");
                     }
                 }
@@ -411,7 +434,7 @@ var widgets = {
 
             //Add the command to the listener for incomplete data
             if(requestKeyers == true) {
-                addRequiredInformation("atemKeyers", requiredInformation);
+                addRequiredInformation(type, requiredInformation);
             }
         }
     },
@@ -485,10 +508,10 @@ var widgets = {
                     if(value !== undefined) {
                         if(parseInt(input) == parseInt(value)) {
                             button.classList.remove("offColor");
-                            button.classList.add("onColor");
+                            button.classList.add("liveColor");
                         }
                         else {
-                            button.classList.remove("onColor");
+                            button.classList.remove("liveColor");
                             button.classList.add("offColor");
                         }
                     }
@@ -499,7 +522,24 @@ var widgets = {
 
                 //Set the button text if known
                 var name = null;
-                try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["longName"];}catch(e){}
+                switch(button.getAttribute("nameType")) {
+                    default: {
+                        try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["longName"];}catch(e){}
+                        break;
+                    }
+                    case "short": {
+                        try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["shortName"];}catch(e){}
+                        break;
+                    }
+                    case "id" :{
+                        name = input;
+                        break;
+                    }
+                    case "none": {
+                        name = button.innerHTML;
+                        break;
+                    }
+                }   
             
                 //Set the button text to the macro name
                 if(name === null) {
@@ -592,10 +632,10 @@ var widgets = {
                     if(value !== undefined) {
                         if(input == value) {
                             button.classList.remove("offColor");
-                            button.classList.add("onColor");
+                            button.classList.add("prevColor");
                         }
                         else {
-                            button.classList.remove("onColor");
+                            button.classList.remove("prevColor");
                             button.classList.add("offColor");
                         }
                     }
@@ -606,7 +646,24 @@ var widgets = {
 
                 //Set the button text if known
                 var name = null;
-                try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["name"];}catch(e){}
+                switch(button.getAttribute("nameType")) {
+                    default: {
+                        try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["longName"];}catch(e){}
+                        break;
+                    }
+                    case "short": {
+                        try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["shortName"];}catch(e){}
+                        break;
+                    }
+                    case "id" :{
+                        name = input;
+                        break;
+                    }
+                    case "none": {
+                        name = button.innerHTML;
+                        break;
+                    }
+                }  
             
                 //Set the button text to the macro name
                 if(name === null) {

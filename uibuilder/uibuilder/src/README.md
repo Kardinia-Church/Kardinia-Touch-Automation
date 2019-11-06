@@ -27,3 +27,25 @@ Sets a ac value to a element
 ```<h1 name="acValue" type="temp" acname="auditorium"></h1>```
 - type is the type to display (temp, setTemp, mode, fan, power)
 - acname is the ac name (supports multiple)
+
+## programInputButton / previewInputButton
+Sets a ATEM ME program/preview input to a input
+```<button name="programInputButton" me="0" input="1" nameType="short"></button>```
+```<button name="previewInputButton" me="0" input="1" nameType="short"></button>```
+- me is the me number to switch
+- input is the input number to switch to
+- nameType is the type of name to display (none = do not set, short, long, id)
+- ask should the user be asked if they're sure (yes/no)
+- askText the text to display the user when the ask dialog is open
+- passwordRequired should a password be entered to perform the action (yes/no)
+
+## keyerButton
+Sets a keyer on/off on the ATEM
+```<button name="keyerButton" keyerType="downstream" keyer="0" me="0" displayMeInName="yes">```
+- keyerType is the type of keyer upstream/downstream
+- keyer is the keyer id
+- me is the me number
+- ask should the user be asked if they're sure (yes/no)
+- askText the text to display the user when the ask dialog is open
+- passwordRequired should a password be entered to perform the action (yes/no)
+- displayMeInName should the me number be displayed in the name eg DS1 ME1 or DS1

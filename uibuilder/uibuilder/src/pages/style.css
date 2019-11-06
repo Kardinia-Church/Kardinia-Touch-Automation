@@ -49,8 +49,9 @@ h2 {
     height: 80px;
 }
 #generatedAtemSwitcherContent button{
-    width: 5vw;
-    height: 5vw;
+    width: 8.2vw;
+    height: 20vh;
+    font-size: 1.5vw;
 }
 .split {
     margin: 0;
@@ -92,6 +93,12 @@ h2 {
 }
 .onColor {
     background-color: silver;
+}
+.liveColor {
+    background-color: red;
+}
+.previewColor {
+    background-color: lightgreen;
 }
 .pressedColor {
     background-color: rgb(156, 156, 156);
@@ -143,5 +150,11 @@ h2 {
         height: 25vw;
         display: block;
         border-radius: 5px;
+    }
+    #generatedAtemSwitcherContent button{
+        width: 7vw;
+        height: 13vh;
+        margin-bottom: 13vh;
+        font-size: 1.5vw;
     }
 }

@@ -514,7 +514,7 @@
   "node-red-contrib-sensibo": {
    "name": "node-red-contrib-sensibo",
    "version": "0.3.1",
-   "local": false,
+   "local": true,
    "nodes": {
     "sensibo": {
      "name": "sensibo",
@@ -527,6 +527,43 @@
      "local": true,
      "module": "node-red-contrib-sensibo",
      "file": "\\Users\\hayden\\.node-red\\node_modules\\node-red-contrib-sensibo\\sensibo.js"
+    }
+   }
+  },
+  "hdl-automation-nodered": {
+   "name": "hdl-automation-nodered",
+   "version": "1.2.8",
+   "local": true,
+   "nodes": {
+    "HDLNetwork": {
+     "name": "HDLNetwork",
+     "types": [
+      "hdl-network"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "hdl-automation-nodered",
+     "file": "\\Users\\hayden\\.node-red\\node_modules\\hdl-automation-nodered\\nodes\\network.js"
+    },
+    "Device": {
+     "name": "Device",
+     "types": [
+      "hdl-device"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "hdl-automation-nodered",
+     "file": "\\Users\\hayden\\.node-red\\node_modules\\hdl-automation-nodered\\nodes\\device.js"
+    },
+    "Bus": {
+     "name": "Bus",
+     "types": [
+      "hdl-bus"
+     ],
+     "enabled": true,
+     "local": true,
+     "module": "hdl-automation-nodered",
+     "file": "\\Users\\hayden\\.node-red\\node_modules\\hdl-automation-nodered\\nodes\\bus.js"
     }
    }
   }
