@@ -1,7 +1,7 @@
 /**
  * Main script file managing all global functionality of the outer website
  * 
- * Version 1.0
+ * Version 1.1
  */
 
 var connectionState = true;
@@ -21,7 +21,9 @@ window.onload = function() {
         isFullyPanel = fully !== undefined;
         thisPanelName = fully.getDeviceId();
     }
-    catch(e){}
+    catch(e){
+        thisPanelName = "web" + Math.floor(Math.random() * 1000);
+    }
 
     //Check for compatibility
     if(sessionStorage === undefined || sessionStorage === null) {
@@ -168,6 +170,7 @@ window.onload = function() {
     uibuilder.onChange('ioConnected', function(state) {
         if(state == true) {
             if(connectionState == false) {
+                console.log("Reloading cause connection state changed");
                 location.reload();
             }
         }
@@ -179,6 +182,8 @@ window.onload = function() {
 
     //Incoming message from node red
     uibuilder.onChange('msg', function(msg) {
+        //If there is a device field and we are not that device don't process it
+        if(msg.device !== undefined && msg.device !== null) {if(msg.device != thisPanelName){return;}}
         switch(msg.topic) {
             case "status": { 
                 for(var key in msg.payload) {
@@ -235,6 +240,7 @@ window.onload = function() {
                 }
             }
         }
+        console.log(msg);
     });
 
     //Request startup information
@@ -243,12 +249,15 @@ window.onload = function() {
     setTimeout(function(){
         if(connectionState == true && (sessionStorage.getItem("mode") == "unknown" || sessionStorage.getItem("mode") === undefined || sessionStorage.getItem("mode") === null)) {
             displayInformation("Failed to Get Information From Server", "error", true); 
-            setTimeout(function(){location.reload();}, 10000);
+            setTimeout(function(){console.log("Reloading cause mode was not obtained"); location.reload();}, 10000);
         }
     }, 5000);
 
     setElementsVisibility();
     updatePage();
+
+    //Write information to console for debugging
+    console.log("Device Information\nIs Fully Panel: " + isFullyPanel + "\nPanel Name: " + thisPanelName);
 }
 
 //Shows the are you sure screen. Calls the callback with true being yes and false being no
@@ -290,6 +299,7 @@ function showPassword(password, callback, returnParam1) {
     //If there wasn't a password passed we are missing information reload
     if(password === undefined || password === null || password == "") {
         sessionStorage.clear();
+        console.log("Reloading cause a password was not sent from the server");
         location.reload();
     }
 
@@ -469,7 +479,7 @@ function updatePage() {
         loadedContentCheck = setTimeout(function(){
             if(pageLoaded == false){
                 displayInformation("An error occured loading the page. Please try again", "error", true);
-                setTimeout(function(){sessionStorage.clear(); location.reload();}, 2000);
+                setTimeout(function(){sessionStorage.clear(); console.log("Reloading because an error occured loading the page"); location.reload();}, 2000);
             }
         }, 5000);
     }, 500);
@@ -591,6 +601,7 @@ function requestStatus(type) {
     //Build the payload
     var msg = {
         "topic": "status",
+        "device": thisPanelName,
         "payload": type
     }
     uibuilder.send(msg);
