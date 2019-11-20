@@ -1,7 +1,7 @@
 /**
  * Main global script file for the inner website
  * 
- * Version 1.0
+ * Version 1.1
  */
 
 var requiredInformation;

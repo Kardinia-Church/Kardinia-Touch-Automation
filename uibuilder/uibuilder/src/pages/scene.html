@@ -8,13 +8,18 @@
     <section class="split" mode="all" showWhileLocked="no">
         <h2>Scenes</h2>
         <aside class="split">
-            <button name="commandButton" command="scene" value="church" ask="yes" askText="This will setup the building for a church service">Church</button>
-            <button name="commandButton" command="scene" value="playgroups" ask="yes" askText="This will setup the building for playgroups">Playgroups</button>
-            <button name="commandButton" command="scene" value="youth" ask="yes" askText="This will setup the building for a youth service">Youth</button>
-            <button name="commandButton" command="scene" value="childcare" ask="yes" askText="This will setup the building for a childcare event">Childcare</button>
-            <button name="commandButton" command="scene" value="kids" ask="yes" askText="This will setup the building for a kids service">Kids</button>
-        </aside>
-    </section>
+            <button name="commandButton" command="lightingScene" value="Event HOLDING" replyNotRequired="yes" flash="yes">Event</button>
+            <button name="commandButton" command="lightingScene" value="Welcome Home HOLDING" replyNotRequired="yes" flash="yes">Welcome Home</button>
+            <button name="commandButton" command="lightingScene" value="Youth HOLDING" replyNotRequired="yes" flash="yes">Youth</button>
+            <button name="commandButton" command="lightingScene" value="5-6 Kids HOLDING" replyNotRequired="yes" flash="yes">5-6 Kids</button>
+        </aside> 
+        <aside class="split"> 
+            <button name="commandButton" command="lightingScene" value="Young Adults HOLDING" replyNotRequired="yes" flash="yes">Young Adults</button>
+            <button name="commandButton" command="lightingScene" value="Sunday Night Chapel HOLDING" replyNotRequired="yes" flash="yes">Sunday Night Chapel</button>
+            <button name="commandButton" command="lightingScene" value="Playgroups HOLDING" replyNotRequired="yes" flash="yes">Playgroups</button>
+            <button name="commandButton" command="lightingScene" value="Childcare HOLDING" replyNotRequired="yes" flash="yes">Childcare</button>
+        </aside> 
+    </section> 
 
     <script src="../utility.js"></script>
     <script src="../widgets.js"></script>

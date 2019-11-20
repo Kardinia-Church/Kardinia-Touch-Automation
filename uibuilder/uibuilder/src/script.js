@@ -1,7 +1,7 @@
 /**
  * Main script file managing all global functionality of the outer website
  * 
- * Version 1.1
+ * Version 1.2
  */
 
 var connectionState = true;
@@ -211,6 +211,8 @@ window.onload = function() {
                     }
                 }
                 clearTimeout(waitingForResponse.status);
+                waitingForResponse.status = undefined;
+                clearTimeout(waitingForResponse.request);
                 waitingForResponse.request = undefined;
 
                 break;
@@ -221,9 +223,11 @@ window.onload = function() {
                         sessionStorage.setItem(key, msg.payload[key]);
                     }
                 }
+
+                clearTimeout(waitingForResponse.status);
+                waitingForResponse.status = undefined;
                 clearTimeout(waitingForResponse.request);
-                waitingForResponse.request = undefined;
-                
+                waitingForResponse.request = undefined;      
                 break;
             }
             case "information": {
@@ -562,6 +566,10 @@ function sendRequest(request, passwordRequired, ask, askText) {
         waitingForResponse.request = setTimeout(function(){
             
             
+            console.log("THIS");
+
+
+
             displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error");
             
             

@@ -8,20 +8,6 @@
     <!-- Slides -->
     <div id="slides" class="pageContent" style="display: block">
         <section class="split" mode="all" showWhileLocked="no">
-            <h2>Slides</h2>
-            <aside class="split">
-                <button name="commandButton" command="lightingScene" value="Welcome Home HOLDING" replyNotRequired="yes" flash="yes">Welcome Home</button>
-                <button name="commandButton" command="lightingScene" value="Youth HOLDING" replyNotRequired="yes" flash="yes">Youth</button>
-                <button name="commandButton" command="lightingScene" value="5-6 Kids HOLDING" replyNotRequired="yes" flash="yes">5-6 Kids</button>
-                <button name="commandButton" command="lightingScene" value="Young Adults HOLDING" replyNotRequired="yes" flash="yes">Young Adults</button>
-            </aside> 
-            <aside class="split"> 
-                <button name="commandButton" command="lightingScene" value="Sunday Night Chapel HOLDING" replyNotRequired="yes" flash="yes">Sunday Night Chapel</button>
-                <button name="commandButton" command="lightingScene" value="Playgroups HOLDING" replyNotRequired="yes" flash="yes">Playgroups</button>
-                <button name="commandButton" command="lightingScene" value="Childcare HOLDING" replyNotRequired="yes" flash="yes">Childcare</button>
-            </aside> 
-        </section> 
-        <section class="split" mode="all" showWhileLocked="no">
             <h2>Macros</h2>
             <aside class="split">
                 <button name="macroButton" macro="0"></button>
@@ -37,6 +23,8 @@
             </aside>
         </section>
         </div>
+
+        <!-- Auditorium -->
         <div id="auditorium" class="pageContent" style="display: none">
             <section class="split" mode="all" showWhileLocked="no">
                 <h2>Macros</h2>
@@ -203,69 +191,6 @@
             <button class="pageButton" onclick="changeVisionPage(event, 'advanced')">Advanced</button>
         </section>
     </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- <section class="split" mode="all" showWhileLocked="no">
-        <h2>ATEM Macro</h2>
-        <aside class="split">
-            <button name="macroButton" macro="0"></button>
-            <button name="macroButton" macro="2"></button>
-            <button name="macroButton" macro="1"></button>
-        </aside>
-        <aside class="split">
-            <button name="macroButton" macro="4"></button>
-            <button name="macroButton" macro="6"></button>
-        </aside>
-    </section>
-    <section class="split" mode="all" showWhileLocked="no">
-        <h2>Camera Position</h2>
-        <aside class="split">
-            <button name="commandButton" command="ptzMacro" value="0" replyNotRequired="yes" flash="yes">Stage</button>
-            <button name="commandButton" command="ptzMacro" value="1" replyNotRequired="yes" flash="yes">Front Stage</button>
-            <button name="commandButton" command="ptzMacro" value="2" replyNotRequired="yes" flash="yes">Whole Room</button>
-            <button name="commandButton" command="ptzMacro" value="3" replyNotRequired="yes" flash="yes">Sound Desk</button>
-            <button name="commandButton" command="ptzMacro" value="4" replyNotRequired="yes" flash="yes">Crowd</button>
-        </aside>
-    </section>
-    <section class="split" mode="all" showWhileLocked="no">
-        <h2>FOH Input</h2>
-        <aside class="split">
-            <button name="programInputButton" me="0" input="1"></button>
-            <button name="programInputButton" me="0" input="3"></button>
-            <button name="programInputButton" me="0" input="4"></button>
-            <button name="programInputButton" me="0" input="5"></button>
-            <button name="programInputButton" me="0" input="2"></button>
-        </aside>
-    </section>
-    <section class="split" mode="all" showWhileLocked="no">
-        <h2>Cafe Input</h2>
-        <aside class="split">
-            <button name="programInputButton" me="1" input="4"></button>
-            <button name="programInputButton" me="1" input="3"></button>
-            <button name="programInputButton" me="1" input="1"></button>
-            <button name="programInputButton" me="1" input="5"></button>
-            <button name="programInputButton" me="1" input="2"></button>
-        </aside>
-    </section>
-    <section class="split" mode="all" showWhileLocked="no">
-        <h2>BOH Input</h2>
-        <aside class="split">
-            <button name="auxInputButton" aux="0" input="2"></button>
-            <button name="auxInputButton" aux="0" input="3"></button>
-            <button name="auxInputButton" aux="0" input="4"></button>
-        </aside>
-    </section> -->
 
     <script src="../utility.js"></script>
     <script src="../widgets.js"></script>
