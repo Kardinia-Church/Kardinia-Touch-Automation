@@ -2,7 +2,7 @@
 /**
  * The widgets file containing all the widgets avaliabile to the HTML
  * 
- * Version 1.2
+ * Version 1.3
  */
 
 var widgets = {
@@ -482,6 +482,9 @@ var widgets = {
 
         //Update the widget based on values
         update: function(button, requiredInformation) {
+            var atemProgramInputs = undefined;
+            try{atemProgramInputs = JSON.parse(sessionStorage.getItem("atemProgramInputs"));}catch(e){}
+
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -504,7 +507,7 @@ var widgets = {
                 if(button.getAttribute("replyNotRequired") != "yes") {
                     //Set the colour based on if it's command is set to it's value
                     var value = undefined;
-                    try{value = JSON.parse(sessionStorage.getItem("atemProgramInputs"))[me]["inputNumber"];}catch(e){}
+                    try{value = atemProgramInputs[me]["inputNumber"];}catch(e){}
                     if(value !== undefined) {
                         if(parseInt(input) == parseInt(value)) {
                             button.classList.remove("offColor");
@@ -606,6 +609,9 @@ var widgets = {
 
         //Update the widget based on values
         update: function(button, requiredInformation) {
+            var atemPreviewInputs = undefined;
+            try{atemPreviewInputs = JSON.parse(sessionStorage.getItem("atemPreviewInputs"));}catch(e){}
+
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
            try {
@@ -628,7 +634,7 @@ var widgets = {
                 if(button.getAttribute("replyNotRequired") != "yes") {
                     //Set the colour based on if it's command is set to it's value
                     var value = undefined;
-                    try{value = JSON.parse(sessionStorage.getItem("atemPreviewInputs"))[me];}catch(e){}
+                    try{value = atemPreviewInputs[me];}catch(e){}
                     if(value !== undefined) {
                         if(input == value) {
                             button.classList.remove("offColor");
@@ -1022,55 +1028,6 @@ var widgets = {
                 }
             }
             catch(e){sections.push(section);}
-
-            // //Loop though all the sections and update their information
-            // for(var i = 0; i < sections.length; i++) {
-            //     var section = sections[i];
-            //     var acName = section.getAttribute("acName");
-            //     var acFeatures = section.getAttribute("features").toLowerCase();
-
-            //     if(acName !== undefined && acName !== null && acFeatures !== undefined && acFeatures !== null) {
-            //        for(var j = 0; j < section.getElementsByTagName("h2").length; j++) {
-            //             switch(section.getElementsByTagName("h2").getAttribute("type")) {
-            //                 case "setTemp": {
-            //                     break;
-            //                 }
-            //             }
-            //        }
-            //     }
-            // }
-
-
-
-
-            // //Loop though all the buttons and set their colours
-            // for(var i = 0; i < buttons.length; i++) {
-            //     button = buttons[i];
-            //     var command = button.getAttribute("command");
-            //     var values = button.getAttribute("values");
-            //     var colors = button.getAttribute("colors");
-
-            //     //If the requied parameters are set
-            //     if(command !== undefined && command !== null && values !== undefined && values !== null && colors !== undefined && colors !== null) {
-            //         values = values.replace(/\s/g,'').split(",");
-            //         colors = colors.replace(/\s/g,'').split(",");
-            //         var currentValue = sessionStorage.getItem(command);
-            //         if(currentValue == undefined || currentValue == null) {
-            //             addRequiredInformation(command, requiredInformation);
-            //         }
-            //         else {
-            //             //Find the index
-            //             var index = 0;
-            //             for(var j = 0; j < values.length; j++) {
-            //                 if(values[j] == currentValue) {
-            //                     index = j;
-            //                     break;
-            //                 }
-            //             }
-            //             button.style.backgroundColor = colors[index];
-            //         }
-            //     }
-            // }
         }
     },
 
@@ -1109,14 +1066,168 @@ var widgets = {
                         for(var j = 0; j < acNames.length; j++) {
                             if(action.split(" ").length == value.split(" ").length) {
                                 for(var k = 0; k < action.split(" ").length; k++) {
-                                    request.push({
+                                    var req = {
                                         "command": "acAction",
                                         "value": {
                                             "acName": acNames[j],
                                             "action": action.split(" ")[k],
-                                            "value": value.split(" ")[k]
+                                            "value": undefined
                                         }
-                                    });
+                                    }
+
+                                    //Decide the action based
+                                    switch(action.split(" ")[k]){ 
+                                        case "power": {
+                                            if(value.split(" ")[k] == "toggle") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                    if(acs[acNames[j]].power == "on" || acs[acNames[j]].power == true) {
+                                                        req.value.value = "off";
+                                                    }
+                                                    else {
+                                                        req.value.value = "on";
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        case "setTemp": {
+                                            //Attempt to increment the temp by 1
+                                            if(value.split(" ")[k] == "up") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                    req.value.value = parseInt(acs[acNames[j]].setTemp) + 1;
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else if(value.split(" ")[k] == "down") {
+                                                //Attempt to lower the temp by 1
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                    req.value.value = parseInt(acs[acNames[j]].setTemp) - 1;
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        case "setMode": {
+                                            //Attempt to increment the mode
+                                            if(value.split(" ")[k] == "up") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.modes.length; l++) {
+                                                        if(acs[acNames[j]].features.modes[l] == acs[acNames[j]].mode) {
+                                                            if(l >= acs[acNames[j]].features.modes.length - 1) {l = -1;}
+                                                            req.value.value = acs[acNames[j]].features.modes[l + 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else if(value.split(" ")[k] == "down") {
+                                                //Attempt to lower the mode
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.modes.length; l++) {
+                                                        if(acs[acNames[j]].features.modes[l] == acs[acNames[j]].mode) {
+                                                            if(l - 1 < 0) {l = acs[acNames[j]].features.modes.length;}
+                                                            req.value.value = acs[acNames[j]].features.modes[l - 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        case "setFan": {
+                                            //Attempt to increment the mode
+                                            if(value.split(" ")[k] == "up") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.fans.length; l++) {
+                                                        if(acs[acNames[j]].features.fans[l] == acs[acNames[j]].fan) {
+                                                            if(l >= acs[acNames[j]].features.fans.length - 1) {l = -1;}
+                                                            req.value.value = acs[acNames[j]].features.fans[l + 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else if(value.split(" ")[k] == "down") {
+                                                //Attempt to lower the mode
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.fans.length; l++) {
+                                                        if(acs[acNames[j]].features.fans[l] == acs[acNames[j]].fan) {
+                                                            if(l - 1 < 0) {l = acs[acNames[j]].features.fans.length;}
+                                                            req.value.value = acs[acNames[j]].features.fans[l - 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        default: {
+                                            req.value.value = value.split(" ")[k];
+                                            break;
+                                        }
+                                    }
+
+                                    request.push(req);
                                 }
                             }
                             else{console.log("Error: Invalid AC action, the actions and values need to line up");}
@@ -1246,24 +1357,36 @@ var widgets = {
                             if(temp != "-") {
                                 elements[i].innerHTML = temp + "&#176;C";
                             } else {elements[i].innerHTML = "-";}
+                            if(power == "off") {
+                                elements[i].innerHTML = "-";
+                            }
                             break;
                         }
                         case "settemp": {
                             if(setTemp != "-") {
                                 elements[i].innerHTML = setTemp + "&#176;C";
                             } else {elements[i].innerHTML = "-";}
+                            if(power == "off") {
+                                elements[i].innerHTML = "-";
+                            }
                             break;
                         }
                         case "mode": {
                             if(mode != "-") {
                                 elements[i].innerHTML = mode.charAt(0).toUpperCase() + mode.slice(1).toLowerCase();
                             } else {elements[i].innerHTML = "-";}
+                            if(power == "off") {
+                                elements[i].innerHTML = "-";
+                            }
                             break;
                         }
                         case "fan": {
                             if(fan != "-") {
                                 elements[i].innerHTML = fan.charAt(0).toUpperCase() + fan.slice(1).toLowerCase();
                             } else {elements[i].innerHTML = "-";}
+                            if(power == "off") {
+                                elements[i].innerHTML = "-";
+                            }
                             break;
                         }
                         case "power": {
