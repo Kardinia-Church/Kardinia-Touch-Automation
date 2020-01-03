@@ -1,33 +1,62 @@
 # Widgets
 
+## General
 
-## commandButton
+### Global parameters
+Parameters that can be set to elements if supported
+- mode will set what mode(s) the element should be shown in
+- showWhileLocked (yes/no) shows/hides the element when in a locked state
+- passwordRequired (yes/no) should the user enter a password to perform the action?
+- ask should the user be asked if they are sure (yes/no)
+- askText the text to display to the user when the ask dialog is open
+- flash (yes/no) should the button flash when clicked
 
-## changePageButton
+### commandButton
+A button to perform a command directly to nodered
+```<button name="commandButton" command="example" value="value"></button>```
+- command is the command to be passed
+- value is the value of that command to be passed
 
-## actionButton
+### toggleCommandButton
+A command button that toggles a value, useful for on/off situations
+```<button name="toggleCommandButton" command="example" values="0, 1, 2" colors="white, blue, silver></button>```
+- command is the command to execute
+- values are the values that are possible separated by a ,
+- colors are the colors to set the button to for each value
 
+If the state above is 0 the color will be white, 1 will be blue, and 2 will be silver
 
+Note if the state is unknown the command will not be executed and will error. Holding the button for 3 seconds will cause the button to flash and set the value to the first value, 0 above.
 
+### changePageButton
+A button to change the current page on the panel
+```<button name="changePageButton" page="example"></button>```
+- page is the page to navigate to
 
-## acControl
+### actionButton
+A button to perform an action to the panel
+```<button name="actionButton" action="lock"></button>```
+- action is the action to perform
+
+Supported actions are:
+- lock locks the panel
+- unlock unlocks the panel
+- tempunlock will unlock the panel for a short period of time before relocking
+
+## AC
+
+### acControl
 An auto generated ac panel
-```<section name="acControl" acName="auditorium cafe" acTitle="All ACs" features="temp setTemp mode fan power" class="split" mode="all" showWhileLocked="no"></section>```
+```<section name="acControl" acName="auditorium cafe" acTitle="All ACs" features="temp setTemp mode fan power"></section>```
 - acName is the acNames to control can be multiple with a space between
 - acTitle is the title that will be displayed on the UI (not required)
 - features is the features supported by the ac (temp, setTemp, mode, fan, power)
-- mode is what modes this will be displayed on
-- showWhileLocked is if it should be shown when the panel is locked (yes/no)
 
-## acAction
+### acAction
 A button to perform an action on a ac(s)
-```<button name="acAction" action="setTemp" value="21" acName="auditorium cafe" ask="no" askText="example" passwordRequired="no" flash="yes"></button>```
+```<button name="acAction" action="setTemp" value="21" acName="auditorium cafe"></button>```
 - action is the action to perform (power, setTemp, setMode, setFan)
 - value is the value for the action can either be a temp value or up/down/toggle to switch
-- ask should the user be asked if they're sure (yes/no)
-- askText the text to display the user when the ask dialog is open
-- passwordRequired should a password be entered to perform the action (yes/no)
-- flash should the button flash when clicked (yes/no)
 
 It is also valid to do multiple actions across multiple acs shown below. Make sure that the action and values line up with spaces
 ```<button name="acAction" acName="auditorium cafe" action="power setTemp setMode setFan" value="on 21 auto auto">Set ACs</button>```
@@ -38,28 +67,31 @@ Sets a ac value to a element
 - type is the type to display (temp, setTemp, mode, fan, power)
 - acname is the ac name (supports multiple)
 
-### ATEM Specific
+### ATEM
 
-## programInputButton / previewInputButton
+### programInputButton / previewInputButton
 Sets a ATEM ME program/preview input to a input
 ```<button name="programInputButton" me="0" input="1" nameType="short"></button>```
 ```<button name="previewInputButton" me="0" input="1" nameType="short"></button>```
 - me is the me number to switch
 - input is the input number to switch to
 - nameType is the type of name to display (none = do not set, short, long, id)
-- ask should the user be asked if they're sure (yes/no)
-- askText the text to display the user when the ask dialog is open
-- passwordRequired should a password be entered to perform the action (yes/no)
 
-## keyerButton
+### keyerButton
 Sets a keyer on/off on the ATEM
 ```<button name="keyerButton" keyerType="downstream" keyer="0" me="0" displayMeInName="yes">```
 - keyerType is the type of keyer upstream/downstream
 - keyer is the keyer id
 - me is the me number
-- ask should the user be asked if they're sure (yes/no)
-- askText the text to display the user when the ask dialog is open
-- passwordRequired should a password be entered to perform the action (yes/no)
 - displayMeInName should the me number be displayed in the name eg DS1 ME1 or DS1
 
-## macroButton
+### macroButton
+A performs a macro run
+```<button name="macroButton" macro="1"></button>```
+- macro is the macro id to be ran
+
+### auxInputButton
+Will change an aux input when clicked
+```<button name="auxInputButton" aux="1" inputId="0"></button>```
+- aux is the aux id to be changed
+- inputId is the input id to set that aux to
