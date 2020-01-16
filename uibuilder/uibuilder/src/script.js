@@ -72,7 +72,7 @@ window.onload = function() {
 
     //If there was a global page set goto that page otherwise we will wait for a mode to come in
     if(sessionStorage.getItem("globalPage") !== undefined && sessionStorage.getItem("globalPage") !== null) {
-        changePage(sessionStorage.getItem("globalPage"));
+        setTimeout(function() {changePage(sessionStorage.getItem("globalPage"));}, 1000);
     }
 
     //Add the listeners on the session storage to detect page updates
@@ -205,7 +205,9 @@ window.onload = function() {
                         else if(key != ""){
                             //Set the value in the storage
                             var item = msg.payload[key];
-                            try{item = JSON.stringify(item);}catch(e){}
+
+                            //If JSON object attempt to convert it to a JSON string
+                            if(typeof item == "object"){try{item = JSON.stringify(item);}catch(e){}}
                             sessionStorage.setItem(key, item);
                         }
                     }
@@ -564,16 +566,7 @@ function sendRequest(request, passwordRequired, ask, askText) {
 
         clearTimeout(waitingForResponse.request);
         waitingForResponse.request = setTimeout(function(){
-            
-            
-            console.log("THIS");
-
-
-
-            displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error");
-            
-            
-            
+            //displayInformation("Sorry mistakes were made attempting to do that. Please try again later", "error"); //BUG: This is shown even when "replyNotRequired" is set
             clearTimeout(waitingForResponse.request);
             waitingForResponse.request = undefined;
         }, 5000);

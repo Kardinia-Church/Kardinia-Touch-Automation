@@ -16,7 +16,7 @@ button {
     background-color: white;
     border: 0px;
     border-radius: 5px;
-    margin: 0.5vw;
+    margin: 1vh;
     padding: 0;
     font-size: 1.5vw;
     font-weight: 600;
@@ -109,6 +109,15 @@ h2 {
 .hidden {
     opacity: 0;
     display: none;
+}
+.volumeBar {
+    width: 5vw; 
+    height: 38vh; 
+    margin: 1vh; 
+    border-radius: 5px;
+}
+.halfButtonWidth {
+    width: 5vw!important;
 }
 
 /* Phone Layout */

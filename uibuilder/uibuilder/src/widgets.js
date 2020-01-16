@@ -2,7 +2,7 @@
 /**
  * The widgets file containing all the widgets avaliabile to the HTML
  * 
- * Version 1.3
+ * Version 1.4
  */
 
 var widgets = {
@@ -1395,6 +1395,386 @@ var widgets = {
                             } else {elements[i].innerHTML = "-";}
                             break;
                         }
+                    }
+                }
+            }
+        }
+    },
+
+"acAction": {
+        //Set the widget
+        set: function(button) {
+            //If a array is passed add them. If one item is passed add it
+            var buttons = [];
+            try {
+                for(var i = 0; i < button.length; i++) {
+                    buttons.push(button[i]);
+                }
+            }
+            catch(e){buttons.push(button);}
+
+            //Loop though all the buttons and add their actions
+            for(var i = 0; i < buttons.length; i++) {
+                button = buttons[i];
+                button.onclick = function() {
+                    // //When clicked send the command
+                    var button = this;
+
+                    var action = button.getAttribute("action");
+                    var value = button.getAttribute("value");
+                    var acName = button.getAttribute("acname");
+
+                    if(action !== undefined && action !== null && value !== undefined && value !== null && acName !== undefined && acName !== null) {
+                        var acNames = acName.split(" ");
+                        
+                        var ask = button.getAttribute("ask");
+                        var askText = button.getAttribute("askText");
+                        var passwordRequired = button.getAttribute("passwordRequired");
+                        var request = [];
+
+                        //Generate command
+                        for(var j = 0; j < acNames.length; j++) {
+                            if(action.split(" ").length == value.split(" ").length) {
+                                for(var k = 0; k < action.split(" ").length; k++) {
+                                    var req = {
+                                        "command": "acAction",
+                                        "value": {
+                                            "acName": acNames[j],
+                                            "action": action.split(" ")[k],
+                                            "value": undefined
+                                        }
+                                    }
+
+                                    //Decide the action based
+                                    switch(action.split(" ")[k]){ 
+                                        case "power": {
+                                            if(value.split(" ")[k] == "toggle") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                    if(acs[acNames[j]].power == "on" || acs[acNames[j]].power == true) {
+                                                        req.value.value = "off";
+                                                    }
+                                                    else {
+                                                        req.value.value = "on";
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        case "setTemp": {
+                                            //Attempt to increment the temp by 1
+                                            if(value.split(" ")[k] == "up") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                    req.value.value = parseInt(acs[acNames[j]].setTemp) + 1;
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else if(value.split(" ")[k] == "down") {
+                                                //Attempt to lower the temp by 1
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                    req.value.value = parseInt(acs[acNames[j]].setTemp) - 1;
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        case "setMode": {
+                                            //Attempt to increment the mode
+                                            if(value.split(" ")[k] == "up") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.modes.length; l++) {
+                                                        if(acs[acNames[j]].features.modes[l] == acs[acNames[j]].mode) {
+                                                            if(l >= acs[acNames[j]].features.modes.length - 1) {l = -1;}
+                                                            req.value.value = acs[acNames[j]].features.modes[l + 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else if(value.split(" ")[k] == "down") {
+                                                //Attempt to lower the mode
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.modes.length; l++) {
+                                                        if(acs[acNames[j]].features.modes[l] == acs[acNames[j]].mode) {
+                                                            if(l - 1 < 0) {l = acs[acNames[j]].features.modes.length;}
+                                                            req.value.value = acs[acNames[j]].features.modes[l - 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        case "setFan": {
+                                            //Attempt to increment the mode
+                                            if(value.split(" ")[k] == "up") {
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.fans.length; l++) {
+                                                        if(acs[acNames[j]].features.fans[l] == acs[acNames[j]].fan) {
+                                                            if(l >= acs[acNames[j]].features.fans.length - 1) {l = -1;}
+                                                            req.value.value = acs[acNames[j]].features.fans[l + 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else if(value.split(" ")[k] == "down") {
+                                                //Attempt to lower the mode
+                                                var acs;
+                                                try {
+                                                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+
+                                                    //Attempt to find the current mode
+                                                    for(var l = 0; l < acs[acNames[j]].features.fans.length; l++) {
+                                                        if(acs[acNames[j]].features.fans[l] == acs[acNames[j]].fan) {
+                                                            if(l - 1 < 0) {l = acs[acNames[j]].features.fans.length;}
+                                                            req.value.value = acs[acNames[j]].features.fans[l - 1];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                catch(e) {
+                                                    displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
+                                                    requestStatus("acValues");
+                                                }
+                                            }
+                                            else {
+                                                req.value.value = value.split(" ")[k];
+                                            }
+                                            break;
+                                        }
+                                        default: {
+                                            req.value.value = value.split(" ")[k];
+                                            break;
+                                        }
+                                    }
+
+                                    request.push(req);
+                                }
+                            }
+                            else{console.log("Error: Invalid AC action, the actions and values need to line up");}
+                        }
+
+                        if(passwordRequired == "yes") {
+                            sendRequest(request, true);
+                        }
+                        else if(ask == "yes") {
+                            sendRequest(request, false, true, askText);
+                        }
+                        else {
+                            sendRequest(request);
+                        }
+                    }
+
+                    //Should the button flash?
+                    if(button.getAttribute("flash") != "no") {
+                        flashButton(button);
+                    }
+                }
+            }
+        },
+
+        //Update the widget based on values
+        update: function(button, requiredInformation) {
+        }
+    },
+
+
+    "soundChannel": {
+        //Set the widget
+        set: function(section) {
+            //If a array is passed add them. If one item is passed add it
+            var sections = [];
+            try {
+                for(var i = 0; i < section.length; i++) {
+                    sections.push(section[i]);
+                }
+            }
+            catch(e){sections.push(section);}
+
+
+            //Loop though all the sections and generate them adding their actions
+            for(var i = 0; i < sections.length; i++) {
+                section = sections[i];
+
+                var channels = section.getAttribute("channel");
+                var channelName = section.getAttribute("channelName");
+                var features = section.getAttribute("features").toLowerCase();
+                var type = section.getAttribute("type");
+
+                if(isValid(channels) && isValid(features) && isValid(type)) {
+                    var channels = channels.split(" ");
+                    var features = features.split(" ");
+                    var generatedContent = "<section class='split' mode='all' showWhileLocked='no'>";
+
+                    //Set the channel name
+                    if(isValid(channelName)) {
+                        generatedContent += "<h2>" + channelName + "</h2>";
+                    }
+                    else {
+                        if(channels.length > 1) {
+                            generatedContent += "<h2>Channels ";
+                            for(var j = 0; j < channels.length; j++) {
+                                generatedContent += channels[j] + ", ";
+                            }
+                            generatedContent = generatedContent.slice(0, generatedContent.length - 2);
+                            generatedContent += "</h2>";
+                        }
+                        else {
+                            generatedContent += "<h2>Channel " + channels[0] + "</h2>";
+                        }
+                    }
+
+                    //Set features
+                    generatedContent += "<aside class='split'>";
+                    if(features.includes("bar")) {
+                        generatedContent += "<aside class='volumeBar' style='background-color: #66ff66;'></aside>";
+                        generatedContent += "<aside class='volumeBar' style='background-color:gray; margin-top: -39vh;'></aside>";
+                    }
+                    generatedContent += "</aside><aside class='split'>";
+
+                    if(features.includes("plus")) {
+                        if(type.toLowerCase() == "passive") { 
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='up' replyNotRequired='yes' flash='yes'>+</button>";
+                        }
+                        else {
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='invalid' flash='yes'>+</button>";
+                        }     
+                    }
+
+                    if(features.includes("minus")) {
+                        if(type.toLowerCase() == "passive") { 
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='down' replyNotRequired='yes' flash='yes'>-</button>";
+                        }
+                        else {
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='invalid' flash='yes'>-</button>";
+                        }     
+                    }
+
+                    //Mute button
+                    if(features.includes("mute")) {
+                        if(type.toLowerCase() == "passive") {
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Mute' value='toggle' replyNotRequired='yes' flash='yes'>Mute</button>";
+                        }
+                        else {
+                            generatedContent += "<button name='toggleCommandButton' command='channel" + channels + "Mute' values='1, 0' colors='white, silver'>Mute</button>";
+                        }
+                    }
+                    generatedContent += "</aside>";
+                    
+  
+                    generatedContent += "</section>"
+                    section.innerHTML = generatedContent;
+
+                    //Set the internal widgets
+                    setWidgets(section);
+                }
+                else {console.log("ERROR: soundChannel" + channels + " has invalid parameters and cannot be generated");}
+            }
+        },
+
+        //Update the widget based on values
+        update: function(section, requiredInformation) {
+            //If a array is passed add them. If one item is passed add it
+            var sections = [];
+            try {
+                for(var i = 0; i < section.length; i++) {
+                    sections.push(section[i]);
+                }
+            }
+            catch(e){sections.push(section);}
+
+            //Loop though all the sections and generate them adding their actions
+            for(var i = 0; i < sections.length; i++) {
+                section = sections[i];
+
+                
+                var channels = section.getAttribute("channel");
+                var features = section.getAttribute("features").toLowerCase();
+                var type = section.getAttribute("type");
+
+                var checkSoundLevel = false;
+                if(isValid(channels) && isValid(features)) {
+                    if(features.includes("plus") || features.includes("minus") || features.includes("bar")) {
+                        if(type.toLowerCase() == "active") { 
+                            if(isValid(sessionStorage.getItem("channel" + channels + "Volume")) == false) {
+                                addRequiredInformation("channel" + channels + "Volume", requiredInformation);    
+                            }
+                            else {
+                                var volumeBarHeightVH = 38;
+                                var volume =  parseInt(sessionStorage.getItem("channel" + channels + "Volume"));
+                                var volumeBar = section.getElementsByClassName("volumeBar")[1];
+                                volumeBar.style.height = (38 * (100 - volume) / 100) + "vh";
+
+                                //Update the plus and minus buttons
+                                for(var button in section.getElementsByTagName("button")) {
+                                    switch(section.getElementsByTagName("button")[button].innerHTML) {
+                                        case "+": {
+                                            var setVol = volume + 3;
+                                            if(setVol > 100){setVol = 100;}
+                                            if(setVol < 0){setVol = 0;}
+                                            section.getElementsByTagName("button")[button].setAttribute("value", setVol);
+                                            break;
+                                        }
+                                        case "-": {
+                                            var setVol = volume - 3;
+                                            if(setVol > 100){setVol = 100;}
+                                            if(setVol < 0){setVol = 0;}
+                                            section.getElementsByTagName("button")[button].setAttribute("value", setVol);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }     
                     }
                 }
             }

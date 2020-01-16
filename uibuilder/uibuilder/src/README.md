@@ -67,7 +67,7 @@ Sets a ac value to a element
 - type is the type to display (temp, setTemp, mode, fan, power)
 - acname is the ac name (supports multiple)
 
-### ATEM
+## ATEM
 
 ### programInputButton / previewInputButton
 Sets a ATEM ME program/preview input to a input
@@ -95,3 +95,19 @@ Will change an aux input when clicked
 ```<button name="auxInputButton" aux="1" inputId="0"></button>```
 - aux is the aux id to be changed
 - inputId is the input id to set that aux to
+
+## Sound
+
+### soundChannel
+Allows for control of volume of a sound channel (Multipule channels are not supported at the moment)
+```<section name="soundChannel" type="active" channel="0" channelName="Mics" features="bar plus minus mute"></section>```
+
+- channel is the channel to effect
+- channelName is the title shown on the user side
+- features is what features to support (bar, plus, minus, mute)
+- type is what type this is active (will set the value according to the local value) / passive (will just send a up/down)
+
+Sends to/from node red
+- channel[channelName]Mute = ("on"/"off") is the mute command
+- channel[channelName]Volume = 0 - 100 (%) is the volume level if the bar is enabled
+- channel[channelName]Volume = "up/down" is the volume level if the bar is disabled

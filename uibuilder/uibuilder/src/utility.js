@@ -2,7 +2,7 @@
  * Utility Methods
  * Where functions that are referenced thoughout the site are defined
  * 
- * Version 1.0
+ * Version 1.1
  */
 
 //Flash a button when clicked
@@ -21,14 +21,36 @@ function flashButton(button, period) {
     }, 100);
 }
 
+//Check if a variable is not null or undefined
+function isValid(variable) {
+    if(variable === undefined || variable === null){return false;}
+    return true;
+}
+
 //Loop though the widgets and set them
-function setWidgets() {
+function setWidgets(element) {
     try {
         for(var key in widgets) {
-            widgets[key].set(document.getElementsByName(key));
+            if(isValid(element)) {
+                var elementsToUpdate = [];
+                for(var elements in element.getElementsByTagName("*")) {
+                    if(isValid(element.getElementsByTagName("*")[elements]) == true) {
+                        try {
+                            if(element.getElementsByTagName("*")[elements].getAttribute("name") == key) {
+                                elementsToUpdate.push(element.getElementsByTagName("*")[elements]);
+                            }
+                        }
+                        catch(e) {}
+                    }
+                }
+                widgets[key].set(elementsToUpdate);
+            }
+            else {
+                widgets[key].set(document.getElementsByName(key));
+            }
         }
     }
-    catch(e) {console.log("Error: Widgets file not included in HTML or other error: " + e);}
+    catch(e) {console.log("Error: Widgets file not included in HTML or other error: "); console.log(e);}
 }
 
 //Loop through the widgets and update them
