@@ -4,6 +4,8 @@
  * Version 1.1
  */
 
+var internalScriptVersion = "1.1"; 
+
 var requiredInformation;
 
 function processGlobal() {

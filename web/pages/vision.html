@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="/uibuilder/common/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/uibuilder/common/internal/style.css">
+</head>
+<body>
+    <!-- Slides -->
+    <div id="slides" class="pageContent" style="display: block">
+        <section class="split" mode="all" showWhileLocked="no">
+            <h2>Macros</h2>
+            <aside class="split">
+                <button name="macroButton" macro="0"></button>
+                <button name="macroButton" macro="1"></button>
+                <button name="macroButton" macro="2"></button>
+                <button name="macroButton" macro="3"></button>
+            </aside>
+            <aside class="split">
+                <button name="macroButton" macro="4"></button>
+                <button name="macroButton" macro="5"></button>
+                <button name="macroButton" macro="6"></button>
+                <button name="macroButton" macro="7"></button>
+            </aside>
+        </section>
+        </div>
+
+        <!-- Auditorium -->
+        <div id="auditorium" class="pageContent" style="display: none">
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Macros</h2>
+                <aside class="split">
+                    <button name="macroButton" macro="0"></button>
+                    <button name="macroButton" macro="1"></button>
+                    <button name="macroButton" macro="2"></button>
+                    <button name="macroButton" macro="3"></button>
+                </aside>
+                <aside class="split">
+                    <button name="macroButton" macro="4"></button>
+                    <button name="macroButton" macro="5"></button>
+                    <button name="macroButton" macro="6"></button>
+                    <button name="macroButton" macro="7"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Side Input</h2>
+                <aside class="split">
+                    <button name="programInputButton" me="2" input="9"></button>
+                    <button name="programInputButton" me="2" input="11"></button>
+                    <button name="programInputButton" me="2" input="12"></button>
+                    <button name="programInputButton" me="2" input="20"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Centre Input</h2>
+                <aside class="split">
+                    <button name="programInputButton" me="3" input="9"></button>
+                    <button name="programInputButton" me="3" input="11"></button>
+                    <button name="programInputButton" me="3" input="12"></button>
+                    <button name="programInputButton" me="3" input="20"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Cafe Input</h2>
+                <aside class="split">
+                    <button name="auxInputButton" aux="0" input="10030"></button>
+                    <button name="auxInputButton" aux="0" input="10040"></button>
+                    <button name="auxInputButton" aux="0" input="10020"></button>
+                    <button name="auxInputButton" aux="0" input="9"></button>
+                </aside>
+                <aside class="split">
+                    <button name="auxInputButton" aux="0" input="12"></button>
+                    <button name="auxInputButton" aux="0" input="20"></button>
+                </aside>
+            </section>
+        </div>
+
+        <!-- Cameras -->
+        <div id="cameras" class="pageContent" style="display: none">
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Camera Input</h2>
+                <aside class="split">
+                    <button name="programInputButton" me="0" input="1"></button>
+                    <button name="programInputButton" me="0" input="2"></button>
+                    <button name="programInputButton" me="0" input="3"></button>
+                    <button name="programInputButton" me="0" input="4"></button>
+                </aside>
+                <aside class="split">
+                    <button name="programInputButton" me="0" input="5"></button>
+                    <button name="programInputButton" me="0" input="6"></button>
+                    <button name="programInputButton" me="0" input="7"></button>
+                    <button name="programInputButton" me="0" input="8"></button>
+                </aside>
+            </section>
+            <section mode="all" class="split" showInShutdown="yes">
+                <h2>Recorders</h2>
+                <aside class="split">
+                    <button name="macroButton" macro="18"></button>
+                    <button name="macroButton" macro="19"></button>
+                </aside>
+            </section>
+        </div>
+
+        <!-- Live Stream -->
+        <div id="liveStream" class="pageContent" style="display: none">
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Macros</h2>
+                <aside class="split">
+                    <button name="macroButton" macro="10"></button>
+                    <button name="macroButton" macro="11"></button>
+                    <button name="macroButton" macro="12"></button>
+                    <button name="macroButton" macro="13"></button>
+                </aside>
+                <aside class="split">
+                    <button name="macroButton" macro="14"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Input</h2>
+                <aside class="split">
+                    <button name="programInputButton" me="1" input="20"></button>
+                    <button name="programInputButton" me="1" input="9"></button>
+                    <button name="programInputButton" me="1" input="19"></button>
+                    <button name="programInputButton" me="1" input="6000"></button>
+                </aside>
+            </section>
+        </div>
+
+        <!-- Advanced -->
+        <div id="advanced" class="pageContent" style="display: none">
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>GFX Feed</h2>
+                <aside class="split">
+                    <button name="auxInputButton" aux="1" input="20"></button>
+                    <button name="auxInputButton" aux="1" input="1"></button>
+                    <button name="auxInputButton" aux="1" input="2"></button>
+                    <button name="auxInputButton" aux="1" input="9"></button>
+                    <button name="auxInputButton" aux="1" input="19"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>BOH Feed</h2>
+                <aside class="split">
+                    <button name="auxInputButton" aux="2" input="19"></button>
+                    <button name="auxInputButton" aux="2" input="10"></button>
+                    <button name="auxInputButton" aux="2" input="9"></button>
+                    <button name="auxInputButton" aux="2" input="20"></button>
+                </aside>
+                <aside class="split">
+                    <button name="auxInputButton" aux="2" input="10030"></button>
+                    <button name="auxInputButton" aux="2" input="10040"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>PVP Camera Feed</h2>
+                <aside class="split">
+                    <button name="auxInputButton" aux="3" input="20"></button>
+                    <button name="auxInputButton" aux="3" input="1"></button>
+                    <button name="auxInputButton" aux="3" input="2"></button>
+                    <button name="auxInputButton" aux="3" input="3"></button>
+                    <button name="auxInputButton" aux="3" input="4"></button>
+                </aside>
+            </section>
+            <section class="split" mode="all" showWhileLocked="no">
+                <h2>Building Feed</h2>
+                <aside class="split">
+                    <button name="auxInputButton" aux="0" input="10030"></button>
+                    <button name="auxInputButton" aux="0" input="10040"></button>
+                    <button name="auxInputButton" aux="0" input="10020"></button>
+                    <button name="auxInputButton" aux="0" input="9"></button>
+                </aside>
+                <aside class="split">
+                    <button name="auxInputButton" aux="0" input="12"></button>
+                    <button name="auxInputButton" aux="0" input="20"></button>
+                </aside>
+            </section>
+            <section mode="all" class="split" showInShutdown="yes" id="other">
+                <h2>Manual</h2>
+                <aside class="split">
+                    <button name="changePageButton" page="advanced-atemControl">ATEM Control</button>
+                </aside>
+            </section>
+        </div>
+
+    </body>
+    <footer>
+        <section mode="all" id="pages" showInShutdown="yes">
+            <button class="pageButton onColor" onclick="changeVisionPage(event, 'slides')">Slides</button>
+            <button class="pageButton" onclick="changeVisionPage(event, 'auditorium')">Auditorium</button>
+            <button class="pageButton" onclick="changeVisionPage(event, 'cameras')">Cameras</button>
+            <button class="pageButton" onclick="changeVisionPage(event, 'liveStream')">Live Stream</button>
+            <button class="pageButton" onclick="changeVisionPage(event, 'advanced')">Advanced</button>
+        </section>
+    </footer>
+
+    <script src="/uibuilder/common/utility.js"></script>
+    <script src="/uibuilder/common/widgets.js"></script>
+    <script src="/uibuilder/common/internal/script.js"></script>
+    <script src="/uibuilder/common/internal/noscript.js"></script>
+    <script>
+        //Change a internal page
+        function changeVisionPage(event, page) {
+            //Hide the elemets first
+            var pageContent = document.getElementsByClassName("pageContent");
+            for(var i = 0; i < pageContent.length; i++) {
+                pageContent[i].style.display = "none";
+            }
+
+            //Remove the active button(s)
+            var pageButtons = document.getElementsByClassName("pageButton");
+            for(var i = 0; i < pageButtons.length; i++) {
+                pageButtons[i].className = pageButtons[i].className.replace(" onColor", "");
+            }
+
+            //Set the current page
+            document.getElementById(page).style.display = "block";
+            event.currentTarget.className += " onColor";
+        }
+    </script>
+</body>
+</html>

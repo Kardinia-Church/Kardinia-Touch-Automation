@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="/uibuilder/common/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/uibuilder/common/internal/style.css">
+</head>
+<body>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>House Lights</h2>
+        <aside class="split">
+            <button name="commandButton" command="houseLights" value="6">100%</button>
+            <button name="commandButton" command="houseLights" value="5">75%</button>
+            <button name="commandButton" command="houseLights" value="4">50%</button>
+            <button name="commandButton" command="houseLights" value="3">25%</button>
+        </aside> 
+        <aside class="split"> 
+            <button name="commandButton" command="houseLights" value="2">15%</button>
+            <button name="commandButton" command="houseLights" value="1">Rear Only</button>
+            <button name="commandButton" command="houseLights" value="0">0%</button>
+        </aside> 
+    </section> 
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Scenes</h2>
+        <aside class="split">
+            <button name="commandButton" command="lightingScene" value="Welcome Home HOLDING" replyNotRequired="yes" flash="yes">Welcome Home</button>
+            <button name="commandButton" command="lightingScene" value="Event HOLDING" replyNotRequired="yes" flash="yes">Event</button>
+            <button name="commandButton" command="lightingScene" value="Video PRESET" replyNotRequired="yes" flash="yes">Video</button>
+            <button name="commandButton" command="lightingScene" value="Floor Lights PRESET" replyNotRequired="yes" flash="yes">Floor Lights</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Stage Lights</h2>
+        <aside class="split">
+            <button name="commandButton" command="frontWash" value="2">Full</button>
+            <button name="commandButton" command="frontWash" value="1">Front Only</button>
+            <button name="commandButton" command="frontWash" value="0">Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Colour</h2>
+        <aside class="split">
+            <button name="commandButton" command="stageColour" value="9" replyNotRequired="yes" flash="yes" style="background-color: #ff4d4d">Red</button>
+            <button name="commandButton" command="stageColour" value="7" replyNotRequired="yes" flash="yes" style="background-color: #66ff66">Green</button>
+            <button name="commandButton" command="stageColour" value="8" replyNotRequired="yes" flash="yes" style="background-color: #0066ff">Blue</button>
+            <button name="commandButton" command="stageColour" value="6" replyNotRequired="yes" flash="yes" style="background-color: #ff8000">Orange</button>
+            <button name="commandButton" command="stageColour" value="4" replyNotRequired="yes" flash="yes" style="background-color: #66ccff">Aqua</button>
+        </aside>
+        <aside class="split">
+            <button name="commandButton" command="stageColour" value="1" replyNotRequired="yes" flash="yes" style="background-color: #ff6699">Pink</button>
+            <button name="commandButton" command="stageColour" value="2" replyNotRequired="yes" flash="yes" style="background-color: #d966ff">Purple</button>
+            <button name="commandButton" command="stageColour" value="5" replyNotRequired="yes" flash="yes" style="background-color: #ffff66">Yellow</button>
+            <button name="commandButton" command="stageColour" value="3" replyNotRequired="yes" flash="yes" style="background-color: #66ffcc">Teal</button>
+            <button name="commandButton" command="stageColour" value="10" replyNotRequired="yes" flash="yes" style="color: black; background-image: linear-gradient( red, orange,green, yellow, blue, indigo, violet)">Rainbow</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Other</h2>
+        <aside class="split">
+            <button name="toggleCommandButton" command="backstageLights" values="0, 1, 2" colors="white, blue, silver">Backstage</button>
+            <button name="toggleCommandButton" command="workLights" values="0, 1" colors="white, silver">Work Lights</button>
+        </aside>
+        <aside class="split">
+            <button name="commandButton" command="lxControl" value="hazeOn" replyNotRequired="yes" flash="yes" ask="yes" askText="This will turn on the hazer">Haze On</button>
+            <button name="commandButton" command="lxControl" value="hazeOff" replyNotRequired="yes" flash="yes" ask="yes" askText="This will turn off the hazer">Haze Off</button>
+            <button name="commandButton" command="lxControl" value="lampOn" replyNotRequired="yes" flash="yes" ask="yes" askText="This will lamp the lighting gear on">Lamp On</button>
+            <button name="commandButton" command="lxControl" value="lampOff" replyNotRequired="yes" flash="yes" ask="yes" askText="This will lamp the lighting gear off">Lamp Off</button>
+        </aside>
+    </section>
+    <script src="/uibuilder/common/utility.js"></script>
+    <script src="/uibuilder/common/widgets.js"></script>
+    <script src="/uibuilder/common/internal/script.js"></script>
+    <script src="/uibuilder/common/internal/noscript.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link href="/uibuilder/common/fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="/uibuilder/common/internal/style.css">
+</head>
+<body>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Lighting Control</h2>
+        <aside class="split">
+            <button name="commandButton" command="lxWorklights" value="on" replyNotRequired="yes" ask="yes" askText="This will turn the lights to white. Perfect for working">Worklights</button>
+            <button name="commandButton" command="lxControl" value="releaseAll" replyNotRequired="yes" ask="yes" askText="This will release all lighting turning it off">Release All</button>
+            <button name="commandButton" command="lxControl" value="dboOn" replyNotRequired="yes" ask="yes" askText="This will set lighting to 0%">DBO On</button>
+            <button name="commandButton" command="lxControl" value="dboOff" replyNotRequired="yes" ask="yes" askText="This will set lighting to 100%">DBO Off</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Other</h2>
+        <aside class="split">
+            <button name="toggleCommandButton" passwordRequired="yes" command="lock" values="0, 1" colors="white, silver">Lock Wallpanels</button>
+        </aside>
+    </section>
+
+    <script src="/uibuilder/common/utility.js"></script>
+    <script src="/uibuilder/common/widgets.js"></script>
+    <script src="/uibuilder/common/internal/script.js"></script>
+    <script src="/uibuilder/common/internal/noscript.js"></script>
+</body>
+</html>

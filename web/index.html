@@ -6,14 +6,14 @@
     <title>Kardinia Church Automation</title>
     <meta name="description" content="Kardinia Church Touch Automation v2">
     <link rel="icon" href="https://www.kardiniachurch.com/favicon.ico">
-    <link rel="stylesheet" href="./style.css">
-    <link href="./fontawesome/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="../uibuilder/common/style.css">
+    <link href="../uibuilder/common/fontawesome/css/all.css" rel="stylesheet">
 
 </head>
 <section id="informationBar" class="hidden"><h2 id="informationText"></h2></section>
 <body>
     <header>
-        <img id="logo" src="./kardiniawhite.png" border="0" alt="Kardinia Church">
+        <img id="logo" src="../uibuilder/common/kardiniawhite.png" border="0" alt="Kardinia Church">
         <button id="panelControlButton" name="changePageButton" page="panelControl" passwordRequired="yes"><i class="fas fa-cogs"></i></button>
     </header>
     <section id="loading">
@@ -30,7 +30,7 @@
         </aside>
     </section>
     <section id="passwordSuccess" class="hidden">
-        <h1 id="passwordSuccessText" style="text-align: center; font-size: 30em;"></h1>
+        <h1 id="passwordSuccessText" class="largeIcon"></h1>
     </section>
     <section id="password" class="hidden">
         <h1 class="largeIcon foregroundYellow"><i class="fas fa-lock"></i></h1>
@@ -56,23 +56,26 @@
     <footer>
         <section id="pages">
             <button name="changePageButton" page="home" mode="all" showWhileLocked="yes"><i class="fas fa-home"></i> <div class="hiddenOnPhoneView inlineBlock">Home</div></button>
-            <button name="changePageButton" page="audio" mode="all" showWhileLocked="yes"><i class="fas fa-microphone"></i> <div class="hiddenOnPhoneView inlineBlock">Audio</div></button>
-            <button name="changePageButton" page="advanced" mode="all" showWhileLocked="no"><i class="fas fa-microchip"></i> <div class="hiddenOnPhoneView inlineBlock">Advanced</div></button>  
+            <button name="changePageButton" page="lights" mode="all" showWhileLocked="no"><i class="fas fa-lightbulb"></i> <div class="hiddenOnPhoneView inlineBlock">Lights</div></button>
+            <button name="changePageButton" page="vision" mode="all" showWhileLocked="no"><i class="fas fa-tv"></i> <div class="hiddenOnPhoneView inlineBlock">Vision</div></button>
+            <button name="changePageButton" page="advanced" mode="all" showWhileLocked="no"><i class="fas fa-microchip"></i> <div class="hiddenOnPhoneView inlineBlock">Advanced</div></button>
+            <button name="changePageButton" page="scene" mode="all" showWhileLocked="no"><i class="far fa-calendar-alt"></i> <div class="hiddenOnPhoneView inlineBlock">Scenes</div></button>
+            <button name="changePageButton" page="ac" mode="all" showWhileLocked="no"><i class="fas fa-thermometer-empty"></i> <div class="hiddenOnPhoneView inlineBlock">AC</div></button>
+            <button name="changePageButton" page="power" mode="all" showWhileLocked="no"><i class="fas fa-power-off"></i> <div class="hiddenOnPhoneView inlineBlock">Power</div></button>     
             <button name="actionButton" action="tempUnlock" passwordRequired="yes" showWhileLocked="only" class="hidden"><i class="fas fa-unlock"></i> <div class="hiddenOnPhoneView inlineBlock">Unlock</div></button>   
         </section>
     </footer>
 </body>
 
 <!-- Scripts -->
-
-
-<!-- Latest UIBuilder stuff  -->
-<script src="./IEFixes.js"></script>
+<script src="../uibuilder/common/IEFixes.js"></script>
 <script src="../uibuilder/vendor/jquery/dist/jquery.min.js"></script>
 <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
 <script src="./uibuilderfe.min.js"></script>
 
-<script src="./utility.js"></script>
-<script src="./widgets.js"></script>
-<script src="./script.js"></script>
+<script src="../uibuilder/common/utility.js"></script>
+<script src="../uibuilder/common/widgets.js"></script>
+<script src="../uibuilder/common/script.js"></script>
+
+<script src="../uibuilder/common/version-checker.js"></script>
 </html>

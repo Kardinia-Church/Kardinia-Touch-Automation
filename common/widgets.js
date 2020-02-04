@@ -1,9 +1,9 @@
 
 /**
  * The widgets file containing all the widgets avaliabile to the HTML
- * 
- * Version 1.4
  */
+
+var widgetsVersion = "1.4";
 
 var widgets = {
     "commandButton": {

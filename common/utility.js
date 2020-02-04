@@ -5,6 +5,8 @@
  * Version 1.1
  */
 
+var utilityVersion = "1.1";
+
 //Flash a button when clicked
 function flashButton(button, period) {
     if(period === undefined || period === null){period=500;}

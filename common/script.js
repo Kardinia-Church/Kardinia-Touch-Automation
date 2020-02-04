@@ -1,8 +1,8 @@
 /**
  * Main script file managing all global functionality of the outer website
- * 
- * Version 1.2
- */
+ **/
+
+var globalScriptVersion = "1.3";
 
 var connectionState = true;
 var waitingForResponse = {
@@ -328,7 +328,8 @@ function showPassword(password, callback, returnParam1) {
         if(response == true) {
             clearInterval(countDownInterval);
             document.getElementById("passwordSuccessText").innerHTML = "<i class='far fa-check-circle'></i>";
-            document.getElementById("passwordSuccessText").className = "foregroundGreen";
+            document.getElementById("passwordSuccessText").classList.remove("foregroundRed");
+            document.getElementById("passwordSuccessText").classList.add("foregroundGreen");
             document.getElementById("passwordSuccess").classList.remove("hidden");
             document.getElementById("passwordSuccess").style.opacity = 1;
             currentPassword = "";
@@ -346,13 +347,14 @@ function showPassword(password, callback, returnParam1) {
                 setTimeout(function(){
                     document.getElementById("passwordSuccess").classList.add("hidden");
                 }, 1000);
-            }, 1000);
+            }, 0);
 
         }
         else {
             timeLeft = 30;
             document.getElementById("passwordSuccessText").innerHTML = "<i class='far fa-times-circle'></i>";
-            document.getElementById("passwordSuccessText").className = "foregroundRed";
+            document.getElementById("passwordSuccessText").classList.add("foregroundRed");
+            document.getElementById("passwordSuccessText").classList.remove("foregroundGreen");
             document.getElementById("passwordSuccess").classList.remove("hidden");
             document.getElementById("passwordSuccess").style.opacity = 1;
 

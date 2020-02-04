@@ -1,6 +1,6 @@
 //Replace required functions that IE does not support
 
-//Version 1.0
+var IEFixesVersion = "1.1";
 
 if (!String.prototype.endsWith) {
     String.prototype.endsWith = function(searchString, position) {

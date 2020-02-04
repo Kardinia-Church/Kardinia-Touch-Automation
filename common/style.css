@@ -1,7 +1,7 @@
 /*
     Main CSS file for the external website
 
-    Version: 1.0 Alpha
+    Version: 1.1
 */
 
 html, body {
@@ -184,6 +184,10 @@ button {
     width: 400px;
     height: 200px;
 }
+.largeIcon {
+    font-size: 50vw;
+    text-align: center;
+}
 .inlineBlock {
     display: inline-block;
 }
@@ -257,5 +261,44 @@ button {
     }
     .passwordButton {
         width: 15vw;
+    }
+  }
+
+  /* Small Sibo Layout */
+  @media only screen and (max-width: 1024px) {
+     footer {
+         height: 16vh;
+     }
+     #pages button {
+        width: 15vw;
+        height: 16vh;
+    }
+    button {
+        font-size: 2.5vw;
+    }
+    #loading, #innerPageContent, #areYouSure {
+        height: calc(100vh - (6vw + 18vh)); /*Header + footer*/
+    }
+    #password, #passwordSuccess, #areYouSure {
+        height: calc(100vh - (6vw + 18vh + 5vw)); /*Header + footer* + padding*/
+    }
+    p {
+        font-size: 2vw;
+        margin: 2vh 0 0 0;
+    }
+    h2 {
+        font-size: 2.5vw;
+        margin: 2vh 0 0 0;
+    }
+    h1 {
+        font-size: 4vw; 
+        margin: 2vh 0 0 0;
+    }
+    .largeIcon {
+        font-size: 30vw;
+    }
+    .largeButton {
+        width: 20vw;
+        height: 20vh;
     }
   }
