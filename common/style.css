@@ -1,7 +1,7 @@
 /*
     Main CSS file for the external website
 
-    Version: 1.1
+    Version: 1.2
 */
 
 html, body {
@@ -147,11 +147,6 @@ button {
     top: 50%;
     left: 50%;
 }
-.largeIcon {
-    font-size: 100px; 
-    padding: 0; 
-    margin: 0;
-}
 .hidden {
     opacity: 0;
     display: none;
@@ -185,8 +180,16 @@ button {
     height: 200px;
 }
 .largeIcon {
-    font-size: 50vw;
+    font-size: 30vw;
     text-align: center;
+    padding: 0; 
+    margin: 0;
+}
+.mediumIcon {
+    font-size: 10vw;
+    text-align: center;
+    padding: 0; 
+    margin: 0;
 }
 .inlineBlock {
     display: inline-block;
