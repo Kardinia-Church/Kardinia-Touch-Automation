@@ -3,7 +3,7 @@
  * The widgets file containing all the widgets avaliabile to the HTML
  */
 
-var widgetsVersion = "1.4";
+var widgetsVersion = "1.5";
 
 var widgets = {
     "commandButton": {
@@ -1683,19 +1683,19 @@ var widgets = {
 
                     if(features.includes("plus")) {
                         if(type.toLowerCase() == "passive") { 
-                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='up' replyNotRequired='yes' flash='yes'>+</button>";
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='up' style='background-color: white' replyNotRequired='yes' flash='yes'>+</button>";
                         }
                         else {
-                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='invalid' flash='yes'>+</button>";
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' style='background-color: white' value='invalid' flash='yes'>+</button>";
                         }     
                     }
 
                     if(features.includes("minus")) {
                         if(type.toLowerCase() == "passive") { 
-                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='down' replyNotRequired='yes' flash='yes'>-</button>";
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' style='background-color: white' value='down' replyNotRequired='yes' flash='yes'>-</button>";
                         }
                         else {
-                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='invalid' flash='yes'>-</button>";
+                            generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' style='background-color: white' value='invalid' flash='yes'>-</button>";
                         }     
                     }
 
@@ -1752,7 +1752,7 @@ var widgets = {
                                 var volumeBarHeightVH = 38;
                                 var volume =  parseInt(sessionStorage.getItem("channel" + channels + "Volume"));
                                 var volumeBar = section.getElementsByClassName("volumeBar")[1];
-                                volumeBar.style.height = (38 * (100 - volume) / 100) + "vh";
+                                volumeBar.style.height = (37 * (100 - volume) / 100) + "vh";
 
                                 //Update the plus and minus buttons
                                 for(var button in section.getElementsByTagName("button")) {
