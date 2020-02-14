@@ -3,7 +3,7 @@
  * The widgets file containing all the widgets avaliabile to the HTML
  */
 
-var widgetsVersion = "1.5";
+var widgetsVersion = "1.6";
 
 var widgets = {
     "commandButton": {
@@ -962,6 +962,7 @@ var widgets = {
                 var acName = section.getAttribute("acName");
                 var acTitle = section.getAttribute("acTitle");
                 var acFeatures = section.getAttribute("features").toLowerCase();
+                var clearOnRefresh = section.getAttribute("clearOnRefresh").toLowerCase();
 
                 if(acName !== undefined && acName !== null && acFeatures !== undefined && acFeatures !== null) {
                     //AC is valid generate it
@@ -973,7 +974,7 @@ var widgets = {
 
                         section.innerHTML += "<h2>" + title + "</h2>";
                         if(acFeatures.includes("temp")) {
-                            section.innerHTML += "<h1 name='acValue' acname='" + acName + "' type='temp'>--</h1>";
+                            section.innerHTML += "<h1 name='acValue' clearOnRefresh='" + clearOnRefresh + "' acname='" + acName + "' type='temp'>--</h1>";
                         }
                         if(acFeatures.includes("power")) {
                             section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "' style='width: 18vw; height: 8vh;'>Power</button>";
@@ -1277,6 +1278,16 @@ var widgets = {
                 if(acName !== undefined && acName !== null && type !== undefined && type !== null) { 
                     elements[i].innerHTML = "-";
                 }
+
+                //If the clearOnRefresh flag is set clear the memory for this ac
+                if(elements[i].getAttribute("clearOnRefresh") == "yes") {
+                    if(sessionStorage.getItem("acValues") !== undefined && sessionStorage.getItem("acValues") !== null) {
+                        //var acs = JSON.parse(sessionStorage.getItem("acValues"));
+                        //delete acs[acName];
+                        //sessionStorage.setItem("acValues", JSON.stringify(acs));
+                        sessionStorage.removeItem("acValues"); //A bit of a hack all ACs will need to be re-requested but it'll take too long to implement
+                    }
+                }
             }
         },
 
@@ -1339,6 +1350,7 @@ var widgets = {
                                 if(acs[acName.split(" ")[j - 1]].fan != acs[acName.split(" ")[j]].fan){isSame = false; break;}
                             }
                             if(isSame == true){fan = acs[acName.split(" ")[j - 1]].fan;}else{fan = "Varies";}
+                            
                         }
                         else {
                             //We only have one ac just set the values
