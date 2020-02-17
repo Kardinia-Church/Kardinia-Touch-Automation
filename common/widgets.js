@@ -3,7 +3,7 @@
  * The widgets file containing all the widgets avaliabile to the HTML
  */
 
-var widgetsVersion = "1.6";
+var widgetsVersion = "1.7";
 
 var widgets = {
     "commandButton": {
@@ -963,6 +963,7 @@ var widgets = {
                 var acTitle = section.getAttribute("acTitle");
                 var acFeatures = section.getAttribute("features").toLowerCase();
                 var clearOnRefresh = section.getAttribute("clearOnRefresh").toLowerCase();
+                 var test = "hi,hi";
 
                 if(acName !== undefined && acName !== null && acFeatures !== undefined && acFeatures !== null) {
                     //AC is valid generate it
@@ -973,12 +974,13 @@ var widgets = {
                         if(acTitle !== undefined && acTitle !== null){title = acTitle;}
 
                         section.innerHTML += "<h2>" + title + "</h2>";
-                        if(acFeatures.includes("temp")) {
+                        if(acFeatures.indexOf("temp") != -1) {
                             section.innerHTML += "<h1 name='acValue' clearOnRefresh='" + clearOnRefresh + "' acname='" + acName + "' type='temp'>--</h1>";
                         }
-                        if(acFeatures.includes("power")) {
+                        if(acFeatures.indexOf("power") != -1) {
                             section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "' style='width: 18vw; height: 8vh;'>Power</button>";
                         }
+                        
 
                         var tableHTML = "<table class='acPanel'>";
 
@@ -1370,7 +1372,7 @@ var widgets = {
                                 elements[i].innerHTML = temp + "&#176;C";
                             } else {elements[i].innerHTML = "-";}
                             if(power == "off") {
-                                elements[i].innerHTML = "-";
+                                elements[i].innerHTML = "Off";
                             }
                             break;
                         }
