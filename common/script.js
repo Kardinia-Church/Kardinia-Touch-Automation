@@ -2,7 +2,7 @@
  * Main script file managing all global functionality of the outer website
  **/
 
-var globalScriptVersion = "1.3";
+var globalScriptVersion = "1.4";
 
 var connectionState = true;
 var waitingForResponse = {
@@ -29,6 +29,21 @@ window.onload = function() {
     if(sessionStorage === undefined || sessionStorage === null) {
         displayInformation("Browser not Suported!", "error", true);
         console.log("Critical Error: Browser does not support sessionStorage!");
+    }
+
+    //Set global parameters
+    var returnHomeTimeout = undefined;
+    if(document.getElementsByTagName("html")[0].getAttribute("returnHome") !== null) {
+        //Return home function is set this will return to the home page after a set period of time
+        changePage = function(page) {
+            clearTimeout(returnHomeTimeout);
+            isLoading("yes");
+            sessionStorage.setItem("page", page);
+            updatePage();
+            if(page !== "home"){
+                returnHomeTimeout = setTimeout(function(){changePage("home");}, parseInt(document.getElementsByTagName("html")[0].getAttribute("returnHome")) * 1000);
+            }
+        }
     }
 
     setWidgets();
