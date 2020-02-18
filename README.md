@@ -4,6 +4,9 @@ Development of the Kardinia Church touch screen interface for use with UIBuilder
 # Widgets
 
 ## General
+### General configuration
+Parameters that are set on the HTML element
+- returnHome will return to the home page after a set amount of seconds
 
 ### Global parameters
 Parameters that can be set to elements if supported
@@ -54,6 +57,7 @@ An auto generated ac panel
 - acName is the acNames to control can be multiple with a space between
 - acTitle is the title that will be displayed on the UI (not required)
 - features is the features supported by the ac (temp, setTemp, mode, fan, power)
+- clearOnRefresh if set to "yes" will clear the stored values when the page is reloaded
 
 ### acAction
 A button to perform an action on a ac(s)
@@ -69,6 +73,7 @@ Sets a ac value to a element
 ```<h1 name="acValue" type="temp" acname="auditorium"></h1>```
 - type is the type to display (temp, setTemp, mode, fan, power)
 - acname is the ac name (supports multiple)
+- clearOnRefresh if set to "yes" will clear the stored value when the page is reloaded
 
 ## ATEM
 
