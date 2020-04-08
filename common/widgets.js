@@ -3,7 +3,7 @@
  * The widgets file containing all the widgets avaliabile to the HTML
  */
 
-var widgetsVersion = "1.7";
+var widgetsVersion = "1.9";
 
 var widgets = {
     "commandButton": {
@@ -483,7 +483,9 @@ var widgets = {
         //Update the widget based on values
         update: function(button, requiredInformation) {
             var atemProgramInputs = undefined;
+            var inputs = undefined;
             try{atemProgramInputs = JSON.parse(sessionStorage.getItem("atemProgramInputs"));}catch(e){}
+            try{inputs = JSON.parse(sessionStorage.getItem("atemInputs"));}catch(e){}
 
            //If a array is passed add them. If one item is passed add it
            var buttons = [];
@@ -525,13 +527,14 @@ var widgets = {
 
                 //Set the button text if known
                 var name = null;
+
                 switch(button.getAttribute("nameType")) {
                     default: {
-                        try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["longName"];}catch(e){}
+                        try{name = inputs[input]["longName"];}catch(e){}
                         break;
                     }
                     case "short": {
-                        try{name = JSON.parse(sessionStorage.getItem("atemInputs"))[input]["shortName"];}catch(e){}
+                        try{name = inputs[input]["shortName"];}catch(e){}
                         break;
                     }
                     case "id" :{
@@ -711,23 +714,29 @@ var widgets = {
                 button.onclick = function() {
                     //When clicked send the command
                     var input = this.getAttribute("input");
-                    var aux = this.getAttribute("aux");
+                    var auxs = this.getAttribute("aux").replace(/\s/g, '').split(",");
+
                     var button = this;
                     //If the requied parameters are set
-                    if(input !== undefined && input !== null && aux !== undefined && aux !== null) {
+                    if(input !== undefined && input !== null && auxs !== undefined && auxs !== null) {
                         var ask = button.getAttribute("ask");
                         var askText = button.getAttribute("askText");
                         var passwordRequired = button.getAttribute("passwordRequired");
-            
-                        //If we should ask before performing a command
-                        if(passwordRequired == "yes") {
-                            sendRequest({"command": "atemAuxInput", "value": {"auxId": aux, "inputId": input}}, true);
-                        }
-                        else if(ask == "yes") {
-                            sendRequest({"command": "atemAuxInput", "value": {"auxId": aux, "inputId": input}}, false, true, askText);
-                        }
-                        else {
-                            sendRequest({"command": "atemAuxInput", "value": {"auxId": aux, "inputId": input}});
+
+                        //Send for all set auxs
+                        for(var key in auxs) {
+                            var aux = auxs[key];
+
+                            //If we should ask before performing a command
+                            if(passwordRequired == "yes") {
+                                sendRequest({"command": "atemAuxInput", "value": {"auxId": aux, "inputId": input}}, true);
+                            }
+                            else if(ask == "yes") {
+                                sendRequest({"command": "atemAuxInput", "value": {"auxId": aux, "inputId": input}}, false, true, askText);
+                            }
+                            else {
+                                sendRequest({"command": "atemAuxInput", "value": {"auxId": aux, "inputId": input}});
+                            }
                         }
                     } else {console.error("There must be a input, and aux defined.", this);}
                 }
@@ -752,20 +761,35 @@ var widgets = {
            for(var i = 0; i < buttons.length; i++) {
                 button = buttons[i];
                 var input = button.getAttribute("input");
-                var aux = button.getAttribute("aux");
+                var auxs = button.getAttribute("aux").replace(/\s/g, '').split(",");
 
                 //If a reply is not required from this button skip it
                 if(button.getAttribute("replyNotRequired") != "yes") {
                     //Set the colour based on if it's command is set to it's value
                     var value = undefined;
-                    try{value = JSON.parse(sessionStorage.getItem("atemAuxInputs"))[aux]["inputNumber"];}catch(e){}
+                    var isSame = true;
+                    //Loop though the auxs and check if their the same
+                    
+                    for(var key in auxs) {
+                        var aux = auxs[key];
+                        try {
+                            if(value === undefined) {
+                                value = JSON.parse(sessionStorage.getItem("atemAuxInputs"))[aux]["inputNumber"];
+                            }
+                            else if(value != JSON.parse(sessionStorage.getItem("atemAuxInputs"))[aux]["inputNumber"]) {
+                                isSame = false;
+                            }
+                        }
+                        catch(e){}
+                    }
+
                     if(value !== undefined) {
-                        if(parseInt(input) == parseInt(value)) {
+                        if(parseInt(input) == parseInt(value) && isSame == true) {
                             button.classList.remove("offColor");
-                            button.classList.add("onColor");
+                            button.classList.add("liveColor");
                         }
                         else {
-                            button.classList.remove("onColor");
+                            button.classList.remove("liveColor");
                             button.classList.add("offColor");
                         }
                     }
@@ -1719,7 +1743,7 @@ var widgets = {
                             generatedContent += "<button name='commandButton' command='channel" + channels + "Mute' value='toggle' replyNotRequired='yes' flash='yes'>Mute</button>";
                         }
                         else {
-                            generatedContent += "<button name='toggleCommandButton' command='channel" + channels + "Mute' values='1, 0' colors='white, silver'>Mute</button>";
+                            generatedContent += "<button name='toggleCommandButton' command='channel" + channels + "Mute' values='on, off' colors='white, #ED4337'>Mute</button>";
                         }
                     }
                     generatedContent += "</aside>";

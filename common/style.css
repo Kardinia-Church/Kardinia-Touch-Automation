@@ -161,7 +161,7 @@ button {
     background-color: #ffcc00;
 }
 .onColor {
-    background-color: silver;
+    background-color: lightgray;
 }
 .offColor {
     background-color: white;
@@ -176,8 +176,8 @@ button {
     color: #66ff66;
 }
 .largeButton {
-    width: 400px;
-    height: 200px;
+    width: 25vw;
+    height: 25vh;
 }
 .largeIcon {
     font-size: 30vw;

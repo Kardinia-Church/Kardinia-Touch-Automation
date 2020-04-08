@@ -92,6 +92,9 @@ h2 {
     border-radius: 5px;
 }
 .onColor {
+    background-color: #66ff66;
+}
+.selectedColor {
     background-color: silver;
 }
 .liveColor {

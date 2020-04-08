@@ -187,6 +187,7 @@ function checkInformation(loadedCallback) {
             clearInterval(checkInformationInterval);
             checkInformationInterval = undefined;
             loadedCallback(false);
+            requestStatus("complete");
         }
     }
 }
