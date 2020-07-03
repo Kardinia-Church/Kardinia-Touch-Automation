@@ -2,10 +2,8 @@
  * Utility Methods
  * Where functions that are referenced thoughout the site are defined
  * 
- * Version 1.1
  */
 
-var utilityVersion = "1.1";
 
 //Flash a button when clicked
 function flashButton(button, period) {

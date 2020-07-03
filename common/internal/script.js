@@ -1,10 +1,7 @@
 /**
  * Main global script file for the inner website
  * 
- * Version 1.1
  */
-
-var internalScriptVersion = "1.1"; 
 
 var requiredInformation;
 
@@ -129,11 +126,13 @@ function getFullyInformation() {
         //Nope
         document.getElementById("fullyInformation").innerHTML = "<h1>Advanced Configuration</h1><p><b>Type: </b>Not fully panel</p>";
         document.getElementById("fullyInformation").innerHTML += "<p><b>Mode: </b>" + sessionStorage.getItem("mode") + "</p>";
+        document.getElementById("fullyInformation").innerHTML += "<p><b>API Version: </b>" + sessionStorage.getItem("APIVersion") + "</p>";
     }
     else {
         //We have a fully kiosk instance
         document.getElementById("fullyInformation").innerHTML = "<h1>Advanced Configuration</h1><p><b>Type: </b>Fully Panel</p>";
         document.getElementById("fullyInformation").innerHTML += "<p><b>Mode: </b>" + sessionStorage.getItem("mode") + "</p>";
+        document.getElementById("fullyInformation").innerHTML += "<p><b>API Version: </b>" + sessionStorage.getItem("APIVersion") + "</p>";
         document.getElementById("fullyInformation").innerHTML += "<p><b>ipv4: </b>" + fully.getIp4Address() + "</p>";
         document.getElementById("fullyInformation").innerHTML += "<p><b>ipv6: </b>" + fully.getIp6Address() + "</p>";
         document.getElementById("fullyInformation").innerHTML += "<p><b>Hostname ipv4: </b>" + fully.getHostname() + "</p>";

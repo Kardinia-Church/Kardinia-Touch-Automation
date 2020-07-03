@@ -2,8 +2,6 @@
  * Main script file managing all global functionality of the outer website
  **/
 
-var globalScriptVersion = "1.4";
-
 var connectionState = true;
 var waitingForResponse = {
     "request": undefined,
@@ -16,6 +14,7 @@ var thisPanelName = undefined;
 var requiredInformation = [];
 
 window.onload = function() {
+
     //Check if this is a fully panel, if it is get the panels information
     try {
         isFullyPanel = fully !== undefined;
@@ -278,7 +277,8 @@ window.onload = function() {
     updatePage();
 
     //Write information to console for debugging
-    console.log("Device Information\nIs Fully Panel: " + isFullyPanel + "\nPanel Name: " + thisPanelName);
+    console.log("Device Information\nIs Fully Panel: " + isFullyPanel + "\nPanel Name: " + thisPanelName + "\nAPI Version: " + this.getVersion());
+    this.sessionStorage.setItem("APIVersion", this.getVersion());
 }
 
 //Shows the are you sure screen. Calls the callback with true being yes and false being no

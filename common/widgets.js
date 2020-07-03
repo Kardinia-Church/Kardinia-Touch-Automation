@@ -3,8 +3,6 @@
  * The widgets file containing all the widgets avaliabile to the HTML
  */
 
-var widgetsVersion = "1.9";
-
 var widgets = {
     "commandButton": {
         //Set the widget
@@ -1002,44 +1000,42 @@ var widgets = {
                             section.innerHTML += "<h1 name='acValue' clearOnRefresh='" + clearOnRefresh + "' acname='" + acName + "' type='temp'>--</h1>";
                         }
                         if(acFeatures.indexOf("power") != -1) {
-                            section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "' style='width: 18vw; height: 8vh;'>Power</button>";
+                            section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "'>Power</button>";
                         }
                         
-
-                        var tableHTML = "<table class='acPanel'>";
+                       var tableHTML = "";
 
                         //Add the ac features
                         for(var j = 0; j < acFeatures.length; j++) {
                             switch(acFeatures[j]) {
                                 case "settemp": {
-                                    tableHTML += "<tr>";
-                                    tableHTML += "<td><button name='acAction' action='setTemp' value='down' acname='" + acName + "'>-</button></td>";
-                                    tableHTML += "<td><h3>Temperature</h3><h2 name='acValue' type='setTemp' acName='" + acName + "'>--</h2></td>";
-                                    tableHTML += "<td><button name='acAction' action='setTemp' value='up' acname='" + acName + "'>+</button></td>";
-                                    tableHTML += "</tr>";
+                                    tableHTML += "<aside class='splitVert'>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><button name='acAction' action='setTemp' value='down' acname='" + acName + "'>-</button></aside>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><h3>Temperature</h3><h2 name='acValue' type='setTemp' acName='" + acName + "'>--</h2></aside>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><button name='acAction' action='setTemp' value='up' acname='" + acName + "'>+</button></aside>";
+                                    tableHTML += "</aside>";
                                     break;
                                 }
                                 case "mode": {
-                                    tableHTML += "<tr>";
-                                    tableHTML += "<td><button name='acAction' action='setMode' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></td>";
-                                    tableHTML += "<td><h3>Mode</h3><h2 name='acValue' type='mode' acName='" + acName + "'>--</h2></td>";
-                                    tableHTML += "<td><button name='acAction' action='setMode' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></td>";
-                                    tableHTML += "</tr>";
+                                    tableHTML += "<aside class='splitVert'>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><button name='acAction' action='setMode' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></aside>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><h3>Mode</h3><h2 name='acValue' type='mode' acName='" + acName + "'>--</h2></aside>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><button name='acAction' action='setMode' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></aside>";
+                                    tableHTML += "</aside>";
                                     break;
                                 }
                                 case "fan": {
-                                    tableHTML += "<tr>";
-                                    tableHTML += "<td><button name='acAction' action='setFan' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></td>";
-                                    tableHTML += "<td><h3>Fan</h3><h2 name='acValue' type='fan' acName='" + acName + "'>--</h2></td>";
-                                    tableHTML += "<td><button name='acAction' action='setFan' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></td>";
-                                    tableHTML += "</tr>";
+                                    tableHTML += "<aside class='splitVert'>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><button name='acAction' action='setFan' value='down' acname='" + acName + "'><i class='fas fa-arrow-left'></i></button></aside>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><h3>Fan</h3><h2 name='acValue' type='fan' acName='" + acName + "'>--</h2></aside>";
+                                    tableHTML += "<aside class='split' style='width: calc(32%)'><button name='acAction' action='setFan' value='up' acname='" + acName + "'><i class='fas fa-arrow-right'></i></button></aside>";
+                                    tableHTML += "</aside>";
                                     break;
                                 }
                             }
                         }
                     }
 
-                    tableHTML += "</table>";
                     section.innerHTML += tableHTML;
                 }
             }

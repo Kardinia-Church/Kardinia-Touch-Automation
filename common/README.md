@@ -1,6 +1,8 @@
 # Kardinia Church Touch Automation
 Development of the Kardinia Church touch screen interface for use with UIBuilder and NodeRed
 
+# Version 2.0
+
 # Widgets
 
 ## General

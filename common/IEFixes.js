@@ -1,7 +1,5 @@
 //Replace required functions that IE does not support
 
-var IEFixesVersion = "1.2";
-
 if (!String.prototype.endsWith) {
     String.prototype.endsWith = function(searchString, position) {
         var subjectString = this.toString();

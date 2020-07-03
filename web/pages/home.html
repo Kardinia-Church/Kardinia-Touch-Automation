@@ -5,69 +5,30 @@
     <link rel="stylesheet" href="/uibuilder/common/internal/style.css">
 </head>
 <body>
-    <section class="split" mode="0" showWhileLocked="no">
-        <h2>Power</h2>
-        <aside class="split">
-            <!-- <button name="changePageButton" page="scene"><i class="fas fa-calendar-plus"></i> Select Scene</button>
-            </br> -->
-            <button name="commandButton" command="mode" value="3" ask="yes" askText="This will turn on all the equipment and ACs. Including the cafe"><i class="fas fa-home"></i> Full</button>
-            <button name="commandButton" command="mode" value="2" ask="yes" askText="This will turn on all equipment and ACs. Except the cafe"><i class="fas fa-tachometer-alt-slowest"></i> Basic</button>
-            <button name="commandButton" command="mode" value="1" ask="yes" askText="This will power sound on only"><i class="fas fa-headphones"></i> Room Only</button>
-            <button name="commandButton" command="mode" value="0" ask="yes" askText="This will turn off the system. Except the cafe"><i class="fas fa-toggle-off"></i> Off</button>
-        </aside>
-    </section>
     <section class="split" mode="all" showWhileLocked="no">
-        <h2>ATEM Macro</h2>
-        <aside class="split">
-            <button name="macroButton" macro="0"></button>
-            <button name="macroButton" macro="2"></button>
-            <button name="macroButton" macro="1"></button>
-        </aside>
-        <aside class="split">
-            <button name="macroButton" macro="4"></button>
-            <button name="macroButton" macro="6"></button>
-        </aside>
-    </section>
-    <section class="split" mode="all" showWhileLocked="no">
-        <h2>House Lights</h2>
-        <aside class="split">
-            <button name="commandButton" command="houseLights" value="7">100%</button>
-            <button name="commandButton" command="houseLights" value="6">75%</button>
-            <button name="commandButton" command="houseLights" value="5">50%</button>
-            <button name="commandButton" command="houseLights" value="4">25%</button>
-        </aside> 
-        <aside class="split"> 
-            <button name="commandButton" command="houseLights" value="3">15%</button>
-            <button name="commandButton" command="houseLights" value="2">Rear Only</button>
-            <button name="commandButton" command="houseLights" value="1">Backstage Only</button>
-            <button name="commandButton" command="houseLights" value="0">0%</button>
-        </aside> 
+        <h2>Mode</h2>
+        <button name="commandButton" command="mode" value="4" ask="yes" askText="This will select the auditorium feed"><i class="fas fa-home"></i> Auditorium</button>
+        <button name="commandButton" command="mode" value="3" ask="yes" askText="This will select the touch pc input with mic inputs"><i class="fas fa-chalkboard-teacher"></i> Course</button>
+        <button name="commandButton" command="mode" value="2" ask="yes" askText="This will select the touch pc input only"><i class="fas fa-map"></i> Signage</button>
+        <button name="commandButton" command="mode" value="5" ask="yes" askText="This will turn everything and unmute all audio channels for use with a band"><i class="fas fa-drum"></i> Band</button>
+        <button name="commandButton" command="mode" value="1" ask="yes" askText="This will turn on sound only"><i class="fas fa-headphones"></i> Sound Only</button>
+        <button name="commandButton" command="mode" value="0" ask="yes" askText="This will turn everything off"><i class="fas fa-toggle-off"></i> Off</button>
     </section> 
-    <section class="split" mode="2 3" showWhileLocked="no">
-        <h2>Stage Lights</h2>
-        <aside class="split">
-            <button name="commandButton" command="frontWash" value="2">Full</button>
-            <button name="commandButton" command="frontWash" value="1">Front Only</button>
-            <button name="commandButton" command="frontWash" value="0">Off</button>
-        </aside>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>TV Input</h2>
+        <button name="programInputButton" me="1" input="1"></button>
+        <button name="programInputButton" me="1" input="2"></button>
+        <button name="programInputButton" me="1" input="4"></button>
+        <button name="programInputButton" me="1" input="3"></button>
     </section>
-    <!-- <section class="split" mode="2 3" showWhileLocked="no">
-        <h2>Colour</h2>
-        <aside class="split">
-            <button name="commandButton" command="stageColour" value="9" replyNotRequired="yes" flash="yes" style="background-color: #ff4d4d">Red</button>
-            <button name="commandButton" command="stageColour" value="7" replyNotRequired="yes" flash="yes" style="background-color: #66ff66">Green</button>
-            <button name="commandButton" command="stageColour" value="8" replyNotRequired="yes" flash="yes" style="background-color: #0066ff">Blue</button>
-            <button name="commandButton" command="stageColour" value="6" replyNotRequired="yes" flash="yes" style="background-color: #ff8000">Orange</button>
-            <button name="commandButton" command="stageColour" value="4" replyNotRequired="yes" flash="yes" style="background-color: #66ccff">Aqua</button>
-        </aside>
-        <aside class="split">
-            <button name="commandButton" command="stageColour" value="1" replyNotRequired="yes" flash="yes" style="background-color: #ff6699">Pink</button>
-            <button name="commandButton" command="stageColour" value="2" replyNotRequired="yes" flash="yes" style="background-color: #d966ff">Purple</button>
-            <button name="commandButton" command="stageColour" value="5" replyNotRequired="yes" flash="yes" style="background-color: #ffff66">Yellow</button>
-            <button name="commandButton" command="stageColour" value="3" replyNotRequired="yes" flash="yes" style="background-color: #66ffcc">Teal</button>
-            <button name="commandButton" command="stageColour" value="10" replyNotRequired="yes" flash="yes" style="color: black; background-image: linear-gradient( red, orange,green, yellow, blue, indigo, violet)">Rainbow</button>
-        </aside>
-    </section> -->
+
+    <section name="soundChannel" channel="1,25" channelName="Touch PC" type="active" features="bar plus minus mute"></section>
+    <section name="soundChannel" channel="1,27" channelName="Bluetooth" type="active" features="bar plus minus mute"></section>
+    <section name="soundChannel" channel="1,29" channelName="Laptop" type="active" features="bar plus minus mute"></section>
+    <section name="soundChannel" channel="1,7" channelName="Auditorium" type="active" features="bar plus minus mute"></section>
+    <section name="soundChannel" channel="1,31" channelName="Mic 1" type="active" features="bar plus minus mute"></section>
+    <section name="soundChannel" channel="1,32" channelName="Mic 2" type="active" features="bar plus minus mute"></section>
+
     <script src="/uibuilder/common/utility.js"></script>
     <script src="/uibuilder/common/widgets.js"></script>
     <script src="/uibuilder/common/internal/script.js"></script>

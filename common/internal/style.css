@@ -1,7 +1,5 @@
 /*
     Main CSS file for the internal website
-
-    Version: 1.3
 */
 
 html {
@@ -37,16 +35,20 @@ h2 {
 #pages {
     position: fixed;
     bottom: 0;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    padding: 0px;
-    border: 5px solid #f06f34;
+    border-radius: 1vw;
+    margin-bottom: 1vw;
+    margin-left: 1vw;
+    width: calc(80% - 4vw);
+    padding: 0.1vw;
     background-color: #f06f34;
 }
 #pages button {
-    width: 172px;
-    height: 80px;
+    width: 10vw;
+    height: 10vh;
+}
+#mobilePaddingTop {
+    height: 0;
+    width: 0;
 }
 #generatedAtemSwitcherContent button{
     width: 8.2vw;
@@ -54,25 +56,49 @@ h2 {
     font-size: 1.5vw;
 }
 .split {
-    margin: 0;
     float: left;
     text-align: center;
 }
-.split .split {
-	margin-left: 0.2vw;
+.splitVert {
+    text-align: center;
+}
+
+.split .split, .splitVert .split {
+    padding: 0;
+    margin: 0;
+    margin-left: 0.2vw;
 }
 .split button {
     width: 10vw;
+    /* width: calc(100% - 1vw); */
     height: 12vh;
     display: block;
     border-radius: 5px;
 }
-.split h2 {
-    margin-bottom: 2vh;
+
+.split .split button {
+    width: 10vw;
+    height: 12vh;
+    display: block;
 }
+
+/* .acPanel td {
+    padding: 0;
+    margin: 0;
+    width: 33%;
+}
+
+.acPanel tbody {
+    display: table;
+    width: 280%;
+    padding: 0;
+    margin: 0;
+}
+
 .acPanel {
     min-width: 18vw;
     margin: 0;
+    padding: 0;
     text-align: center;
 }
 .acPanel h3 {
@@ -82,15 +108,19 @@ h2 {
 }
 .acPanel h2 {
     font-size: 2vw;
-    margin: 0;
+    margin-left: 0;
     padding: 0;
 }
 .acPanel button {
-    width: 5vw;
+    width: calc(100% - 0.5vw);
     height: 10vh;
     display: block;
-    border-radius: 5px;
-}
+    border-radius: 1vw;
+    margin: 0;
+    padding: 0;
+} */
+
+
 .onColor {
     background-color: #66ff66;
 }
@@ -114,7 +144,7 @@ h2 {
     display: none;
 }
 .volumeBar {
-    width: 5vw; 
+    width: 2vw; 
     height: 38vh; 
     margin: 1vh; 
     border-radius: 5px;
@@ -137,8 +167,7 @@ h2 {
         font-size: 5vw; 
     }
     h2 {
-        margin: 3vh 1vw 0 0;
-        font-size: 3vw;
+        font-size: 4vw;
     }
     button {
         border-radius: 5px;
@@ -146,34 +175,62 @@ h2 {
         font-size: 4vw;
         font-weight: 20vw;
     }
+    #mobilePaddingTop {
+        height: 15vh; 
+        width: 100%;
+    }
+    #pages {
+        width: calc(100% - 4vw);
+        height: 10vh;
+        top: 1vh;
+    }
     #pages button {
-        height: 10vw;
+        height: calc(100% - 2vw);
         width: 15vw;
-        margin: 0.1vw;
         font-size: 2vw;
     }
     .split {
-        width: 45vw;
+        width: 50%;
     }
     .split .split {
-        width: 21vw;
+        width: 49%;
     }
     .split button {
-        width: 20vw;
-        height: 25vw;
+        margin-left: 2.5vw;
+        /* width: calc(100% - 5vw); */
+        width: 40vw;
+        height: 15vh;
         display: block;
         border-radius: 5px;
     }
-    #generatedAtemSwitcherContent button{
+    .split .split button {
+        width: 20vw;
+        /* width: calc(100% - 3vw); */
+        font-size: 3vw;
+    }
+
+    .splitVert .split {
+        font-size: 2vw;
+    }
+
+    .splitVert .split button {
+        width: 10vw;
+    }
+
+    #generatedAtemSwitcherContent button {
         width: 7vw;
         height: 13vh;
         margin-bottom: 13vh;
         font-size: 1.5vw;
     }
+
+    .volumeBar {
+        width: 20vw;
+    }
 }
 
   /* Small Sibo Layout */
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (min-width: 1023px) and (max-width: 1025px) {
     button {
         border-radius: 5px;
         margin: 1vh;
@@ -182,10 +239,15 @@ h2 {
         font-weight: 20vw;
     }
     .split button {
-        width: 15vw;
+        width: 100vw;
         height: 18vh;
         display: block;
         border-radius: 5px;
+    }
+    .split .split button {
+        width: 15vw;
+        height: 8vw;
+        font-size: 2vw;
     }
     h2 {
         font-size: 3vw;

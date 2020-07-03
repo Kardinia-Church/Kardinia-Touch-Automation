@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" returnHome="300">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
@@ -20,20 +20,18 @@
         <section class="loader"></section>
     </section>
     <section id="areYouSure" class="hidden">
-        <h1 class="mediumIcon foregroundYellow"><i class="fas fa-exclamation-triangle"></i></h1>
         <h1>Are You Sure?</h1>
         <h2 id="areYouSureText"></h2>
         <h2 id="areYouSureCountdown">Will Automatically Select No in 10 Seconds</h3>
-        <aside style="margin: 100px;">
+        <aside style="margin: 10vh;">
             <button id="areYouSureYes" class="largeButton"><i class="fas fa-check foregroundGreen"></i> Yes</button>
             <button id="areYouSureNo" class="largeButton"><i class="far fa-times foregroundRed"></i> No</button>
         </aside>
     </section>
     <section id="passwordSuccess" class="hidden">
-        <h1 id="passwordSuccessText" style="text-align: center; font-size: 30em;"></h1>
+        <h1 id="passwordSuccessText" class="largeIcon"></h1>
     </section>
     <section id="password" class="hidden">
-        <h1 class="mediumIcon foregroundYellow"><i class="fas fa-lock"></i></h1>
         <h1>Authentication Required</h1>
         <h2>Please enter the password below.</h2>
         <p>If you do not know the password and would like to know please contact your campus tech director</p>
@@ -55,11 +53,10 @@
     <object id="innerPageContent" data="./pages/error.html"><html><h1>error</h1></html></object>
     <footer>
         <section id="pages">
-            <button name="changePageButton" page="home" mode="all" showWhileLocked="yes"><i class="fas fa-home"></i> <div class="hiddenOnPhoneView inlineBlock">Home</div></button>
-            <button name="changePageButton" page="lights" mode="all" showWhileLocked="no"><i class="fas fa-lightbulb"></i> <div class="hiddenOnPhoneView inlineBlock">Lights</div></button>
-            <button name="changePageButton" page="vision" mode="all" showWhileLocked="no"><i class="fas fa-tv"></i> <div class="hiddenOnPhoneView inlineBlock">Vision</div></button>
-            <button name="changePageButton" page="advanced" mode="all" passwordRequired="yes" showWhileLocked="no"><i class="fas fa-microchip"></i> <div class="hiddenOnPhoneView inlineBlock">Advanced</div></button>
-            <button name="changePageButton" page="power" mode="all" showWhileLocked="no"><i class="fas fa-power-off"></i> <div class="hiddenOnPhoneView inlineBlock">Power</div></button>     
+            <button name="changePageButton" page="home" mode="all" showWhileLocked="yes"><i class="fas fa-home"></i> <div class="hiddenOnPhoneView inlineBlock">Home</div></button>  
+            <button name="changePageButton" page="input" mode="all" showWhileLocked="yes"><i class="fas fa-tv"></i> <div class="hiddenOnPhoneView inlineBlock">Input</div></button>      
+            <button name="changePageButton" page="audio" mode="all" showWhileLocked="yes"><i class="fas fa-microphone"></i> <div class="hiddenOnPhoneView inlineBlock">Audio</div></button>
+            <button name="changePageButton" page="advanced" mode="all" showWhileLocked="no"><i class="fas fa-microchip"></i> <div class="hiddenOnPhoneView inlineBlock">Advanced</div></button>  
             <button name="actionButton" action="tempUnlock" passwordRequired="yes" showWhileLocked="only" class="hidden"><i class="fas fa-unlock"></i> <div class="hiddenOnPhoneView inlineBlock">Unlock</div></button>   
         </section>
     </footer>

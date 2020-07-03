@@ -5,24 +5,65 @@
     <link rel="stylesheet" href="/uibuilder/common/internal/style.css">
 </head>
 <body>
-    <!-- <section class="split" mode="all" showWhileLocked="no">
-        <h2>Lighting Control</h2>
-        <aside class="split">
-            <button name="commandButton" command="lightingScene" value="workLights" replyNotRequired="yes" ask="yes" askText="This will override and set the stage to full white. Good for working on the stage">On Stage Worklights</button>
-            <button name="commandButton" command="lxControl" value="releaseAll" replyNotRequired="yes" ask="yes" askText="This will release all lighting turning it off">Release All</button>
-            <button name="commandButton" command="lxControl" value="dboOn" replyNotRequired="yes" ask="yes" askText="This will set lighting to 0%">DBO On</button>
-            <button name="commandButton" command="lxControl" value="dboOff" replyNotRequired="yes" ask="yes" askText="This will set lighting to 100%">DBO Off</button>
-        </aside>
-    </section> -->
     <section class="split" mode="all" showWhileLocked="no">
-        <h2>Other</h2>
+        <h2>Kitchen Feed</h2>
         <aside class="split">
-            <!-- <button name="commandButton" command="hdl" value="0" replyNotRequired="yes" flash="yes">Force AC to defaults</button> -->
-            <button name="toggleCommandButton" command="tolietPIRLock" values="0, 1" colors="white, silver">Toliet PIR Lock</button>
-            <button name="toggleCommandButton" command="lock" values="0, 1" colors="white, silver">Lock Wallpanels</button>
+            <button name="auxInputButton" aux="0" input="10010">Building Feed</button>
+            <button name="auxInputButton" aux="0" input="10020">Cafe Feed</button>
+            <button name="auxInputButton" aux="0" input="1">Auditorium Feed</button>
+            <button name="auxInputButton" aux="0" input="2">Digital Signage</button>
+        </aside>
+        <aside class="split">
+            <button name="auxInputButton" aux="0" input="4">Touch PC</button>
+            <button name="auxInputButton" aux="0" input="3">Laptop</button>
         </aside>
     </section>
-
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Kids Rooms</h2>
+        <aside class="split">
+            <button name="auxInputButton" aux="1, 2, 3" input="10010">Building Feed</button>
+            <button name="auxInputButton" aux="1, 2, 3" input="10020">Cafe Feed</button>
+            <button name="auxInputButton" aux="1, 2, 3" input="1">Auditorium Feed</button>
+            <button name="auxInputButton" aux="1, 2, 3" input="2">Digital Signage</button>
+        </aside>
+        <aside class="split">
+            <button name="auxInputButton" aux="1, 2, 3" input="4">Touch PC</button>
+            <button name="auxInputButton" aux="1, 2, 3" input="3">Laptop</button>
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>Info Desk</h2>
+        <aside class="split">
+            <button name="auxInputButton" aux="4, 5" input="10010">Building Feed</button>
+            <button name="auxInputButton" aux="4, 5" input="10020">Cafe Feed</button>
+            <button name="auxInputButton" aux="4, 5" input="1">Auditorium Feed</button>
+            <button name="auxInputButton" aux="4, 5" input="2">Digital Signage</button>
+        </aside>
+        <aside class="split">
+            <button name="auxInputButton" aux="4, 5" input="4">Touch PC</button>
+            <button name="auxInputButton" aux="4, 5" input="3">Laptop</button>  
+        </aside>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>AMP Control</h2>
+        <button name="commandButton" command="ampControl" value="on" replyNotRequired="yes" flash="yes">On</button>
+        <button name="commandButton" command="ampControl" value="off" replyNotRequired="yes" flash="yes">Off</button>
+    </section>
+    <section class="split" mode="all" showWhileLocked="no">
+        <h2>TVs</h2>
+        <aside class="split">
+            <button name="toggleCommandButton" command="tvPower1" values="POF, PON" colors="white, #66ff66">Foyer Desk</button>
+            <button name="toggleCommandButton" command="tvPower2" values="POF, PON" colors="white, #66ff66">Foyer Wall</button>
+        </aside>
+        <aside class="split">
+            <button name="toggleCommandButton" command="tvPower3" values="POF, PON" colors="white, #66ff66">Play Room</button>
+            <button name="toggleCommandButton" command="tvPower4" values="POF, PON" colors="white, #66ff66">Mothers Room</button>
+        </aside>
+        <aside class="split">
+            <button name="toggleCommandButton" command="tvPower5" values="POF, PON" colors="white, #66ff66">Cafe TVs</button>
+            <button name="commandButton" command="tvPower5" value="PSW" replyNotRequired="yes" flash="yes">Invert Cafe TVs Stored State</button>
+        </aside>
+    </section>
     <script src="/uibuilder/common/utility.js"></script>
     <script src="/uibuilder/common/widgets.js"></script>
     <script src="/uibuilder/common/internal/script.js"></script>

@@ -1,7 +1,5 @@
 /*
     Main CSS file for the external website
-
-    Version: 1.2
 */
 
 html, body {
@@ -51,7 +49,7 @@ h2 {
 
 footer {
     text-align: left;
-    position: absolute;
+    position: fixed;
     height: 7vw;
     right: 0;
     left: 0;
@@ -91,8 +89,8 @@ button {
     position: absolute;
     background-color: black;
     opacity: 1;
-    z-index: 1;
-    /* transition: opacity 1s ease-in; */
+    z-index: 0;
+    transition: opacity 1s wi;
 }
 
 #innerPageContent {
@@ -247,6 +245,7 @@ button {
         height: 20vw;
         padding: 1vw;
         text-align: center;
+        position: fixed;
     }
     #pages button {
         width: 11vw;
@@ -268,7 +267,7 @@ button {
   }
 
   /* Small Sibo Layout */
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (min-width: 1024px) and (max-width: 1024px) {
      footer {
          height: 16vh;
      }
