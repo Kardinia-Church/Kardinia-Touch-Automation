@@ -81,11 +81,11 @@ function setElementsVisibility() {
                         break;
                     }
                     default: {
-                        if(mode.trim().includes(",") == true) {
+                        if(mode.replace(/ /g,'').includes(",") == true) {
                             var modeIncluded = false;
                             //There are multiple modes defined by " "
-                            for(var j = 0; j < mode.trim().split(',').length; j++) {
-                                if(sessionStorage.getItem("mode") == mode.trim().split(',')[j]) {
+                            for(var j = 0; j < mode.replace(/ /g,'').split(',').length; j++) {
+                                if(sessionStorage.getItem("mode") == mode.replace(/ /g,'').split(',')[j]) {
                                     modeIncluded = true;
                                 }
                             }
