@@ -51,6 +51,11 @@ Supported actions are:
 - unlock unlocks the panel
 - tempunlock will unlock the panel for a short period of time before relocking
 
+### projectorInformation
+A section element that shows relevant information about a projector.
+```<button name="projectorInformation" projector="FOH"></button>```
+- ```projector``` is the projector id to show
+
 ## AC
 
 ### acControl

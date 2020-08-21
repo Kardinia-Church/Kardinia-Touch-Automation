@@ -1,4 +1,4 @@
-var version = "2.2";
+var version = "2.3";
 
 function getVersion() {
     return version;

@@ -1814,4 +1814,58 @@ var widgets = {
             }
         }
     },
+    "projectorInformation": {
+        //Set the widget
+        set: function(element) {
+            //If a array is passed add them. If one item is passed add it
+            var elements = [];
+            try {
+                for(var i = 0; i < element.length; i++) {
+                    elements.push(element[i]);
+                }
+            }
+            catch(e){elements.push(element);}
+
+            //Loop though all the buttons and add their actions
+            for(var i = 0; i < elements.length; i++) {
+                element = elements[i]; 
+            }
+        },
+
+        //Update the widget
+        update: function(element) {
+            //If a array is passed add them. If one item is passed add it
+            var elements = [];
+            try {
+                for(var i = 0; i < element.length; i++) {
+                    elements.push(element[i]);
+                }
+            }
+            catch(e){elements.push(element);}
+
+            //Loop though all the buttons and add their actions
+            for(var i = 0; i < elements.length; i++) {
+                element = elements[i]; 
+                var title = element.getAttribute("friendlyname") === null ? element.getAttribute("id") : element.getAttribute("friendlyname");
+                var currHours = sessionStorage.getItem("projectorHours" + element.getAttribute("id"));
+                var totalHours = sessionStorage.getItem("projectorTotalHours" + element.getAttribute("id"));
+
+                element.innerHTML = "";
+                element.innerHTML += "<h2>" + title + "</h2>";
+
+                if(currHours !== null && totalHours !== null) {
+                    if(parseInt(currHours) >= totalHours) {
+                        element.innerHTML += "<h3 style='background-color: red'>Lamp Hours - " + currHours + "/" + totalHours + "</h3>";
+                    }
+                    else {
+                        element.innerHTML += "<h3>Lamp Hours - " + currHours + "/" + totalHours + "</h3>";
+                    }
+                }
+                else {
+                    element.innerHTML += "<h3>Lamp Hours - Unknown";
+                    addRequiredInformation("projectorHours" + element.getAttribute("id"), requiredInformation); 
+                }
+            }
+        }
+    },
 }
