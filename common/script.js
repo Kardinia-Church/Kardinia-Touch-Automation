@@ -510,6 +510,7 @@ function updatePage() {
 
 //Set the loading
 var loadingTimeout = undefined;
+var removeLoadingBanner = undefined;
 function isLoading(loading, forceSet) {
     if(forceSet === undefined || forceSet === null){forceSet=false;}
     if(sessionStorage.getItem("loading") != loading || forceSet == true) {
@@ -524,7 +525,7 @@ function isLoading(loading, forceSet) {
                     displayInformation("Timed out while loading", "warning");
                     isLoading("no");
                 }
-            }, 5000);
+            }, 2000);
         }
         else if(loading == "no") {
             clearTimeout(loadingTimeout);
