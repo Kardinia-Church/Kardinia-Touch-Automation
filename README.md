@@ -108,7 +108,7 @@ Will change an aux input when clicked
 
 ### soundChannel
 Allows for control of volume of a sound channel (Multipule channels are not supported at the moment)
-```<section name="soundChannel" type="active" channel="0" channelName="Mics" features="bar plus minus mute"></section>```
+```<section name="soundChannel" type="active" channel="0,1" channelName="Mics" features="bar,plus,minus,mute"></section>```
 
 - channel is the channel to effect
 - channelName is the title shown on the user side
