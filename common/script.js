@@ -14,7 +14,6 @@ var thisPanelName = undefined;
 var requiredInformation = [];
 
 window.onload = function() {
-
     //Check if this is a fully panel, if it is get the panels information
     try {
         isFullyPanel = fully !== undefined;

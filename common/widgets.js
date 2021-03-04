@@ -1685,8 +1685,8 @@ var widgets = {
                 var type = section.getAttribute("type");
 
                 if(isValid(channels) && isValid(features) && isValid(type)) {
-                    var channels = channels.split(" ");
-                    var features = features.split(" ");
+                    var channels = channels.replace(/ /g,'').split(",");
+                    var features = features.replace(/ /g,'').split(",");
                     var generatedContent = "<section class='split' mode='all' showWhileLocked='no'>";
 
                     //Set the channel name
@@ -1709,13 +1709,13 @@ var widgets = {
 
                     //Set features
                     generatedContent += "<aside class='split'>";
-                    if(features.includes("bar")) {
+                    if(features.indexOf("bar") >= 0) {
                         generatedContent += "<aside class='volumeBar' style='background-color: #66ff66;'></aside>";
                         generatedContent += "<aside class='volumeBar' style='background-color:gray; margin-top: -39vh;'></aside>";
                     }
                     generatedContent += "</aside><aside class='split'>";
 
-                    if(features.includes("plus")) {
+                    if(features.indexOf("plus") >= 0) {
                         if(type.toLowerCase() == "passive") { 
                             generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' value='up' style='background-color: white' replyNotRequired='yes' flash='yes'>+</button>";
                         }
@@ -1724,7 +1724,7 @@ var widgets = {
                         }     
                     }
 
-                    if(features.includes("minus")) {
+                    if(features.indexOf("minus") >= 0) {
                         if(type.toLowerCase() == "passive") { 
                             generatedContent += "<button name='commandButton' command='channel" + channels + "Volume' style='background-color: white' value='down' replyNotRequired='yes' flash='yes'>-</button>";
                         }
@@ -1734,7 +1734,7 @@ var widgets = {
                     }
 
                     //Mute button
-                    if(features.includes("mute")) {
+                    if(features.indexOf("mute") >= 0) {
                         if(type.toLowerCase() == "passive") {
                             generatedContent += "<button name='commandButton' command='channel" + channels + "Mute' value='toggle' replyNotRequired='yes' flash='yes'>Mute</button>";
                         }
@@ -1777,7 +1777,7 @@ var widgets = {
 
                 var checkSoundLevel = false;
                 if(isValid(channels) && isValid(features)) {
-                    if(features.includes("plus") || features.includes("minus") || features.includes("bar")) {
+                    if(features.indexOf("plus") >= 0 || features.indexOf("minus") >= 0 || features.indexOf("bar") >= 0) {
                         if(type.toLowerCase() == "active") { 
                             if(isValid(sessionStorage.getItem("channel" + channels + "Volume")) == false) {
                                 addRequiredInformation("channel" + channels + "Volume", requiredInformation);    
