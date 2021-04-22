@@ -81,8 +81,8 @@ Sets a ac value to a element
 Sets a ATEM ME program/preview input to a input
 ```<button name="programInputButton" me="0" input="1" nameType="short"></button>```
 ```<button name="previewInputButton" me="0" input="1" nameType="short"></button>```
-- me is the me number to switch
-- input is the input number to switch to
+- me is the me number to switch (if not using a atem just send a number here that is the same)
+- input is the input number to switch to (can be a string)
 - nameType is the type of name to display (none = do not set, short, long, id)
 
 ### keyerButton

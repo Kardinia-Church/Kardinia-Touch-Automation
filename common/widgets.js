@@ -509,7 +509,7 @@ var widgets = {
                     var value = undefined;
                     try{value = atemProgramInputs[me]["inputNumber"];}catch(e){}
                     if(value !== undefined) {
-                        if(parseInt(input) == parseInt(value)) {
+                        if(input == value) {
                             button.classList.remove("offColor");
                             button.classList.add("liveColor");
                         }

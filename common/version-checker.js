@@ -1,4 +1,4 @@
-var version = "2.3.2";
+var version = "2.3.3";
 
 var versions = [
     {
@@ -11,6 +11,12 @@ var versions = [
         "version": "2.3.2",
         "changes": [
             "Fixed a compatibility issue with the wallpanels (IE) and the array includes method. This fixed an issue where the sound channels would not appear"
+        ]
+    },
+    {
+        "version": "2.3.3",
+        "changes": [
+            "Removed parseInt from the programInputButton so that strings can be used for input names"
         ]
     }
 ];
