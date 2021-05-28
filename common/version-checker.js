@@ -1,4 +1,4 @@
-var version = "2.3.3";
+var version = "2.3.2";
 
 var versions = [
     {
@@ -14,9 +14,9 @@ var versions = [
         ]
     },
     {
-        "version": "2.3.3",
+        "version": "2.4.0",
         "changes": [
-            "Removed parseInt from the programInputButton so that strings can be used for input names"
+            "Updated AC interface"
         ]
     }
 ];
