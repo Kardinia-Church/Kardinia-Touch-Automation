@@ -18,6 +18,12 @@ var versions = [
         "changes": [
             "Updated AC interface"
         ]
+    },
+    {
+        "version": "2.5.0",
+        "changes": [
+            "Updated ACControl to new format"
+        ]
     }
 ];
 

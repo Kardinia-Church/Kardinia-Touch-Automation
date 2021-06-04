@@ -35,7 +35,7 @@
                         section.innerHTML += "<h1 name='acValue' clearOnRefresh='" + clearOnRefresh + "' acname='" + acName + "' type='temp'>--</h1>";
                     }
                     if(acFeatures.indexOf("power") != -1) {
-                        section.innerHTML += "<button name='acAction' action='power' value='toggle' acname='" + acName + "'>Power</button>";
+                        section.innerHTML += "<button name='acAction' style='margin-left: 10vw' type='power' action='power' value='toggle' acname='" + acName + "'>Power</button>";
                     }
                     
                    var tableHTML = "";
@@ -136,7 +136,7 @@ widgets["acAction"] = {
                                         if(value.split(" ")[k] == "toggle") {
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
                                                 if(acs[acNames[j]].power == "on" || acs[acNames[j]].power == true) {
                                                     req.value.value = "off";
                                                 }
@@ -146,7 +146,7 @@ widgets["acAction"] = {
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else {
@@ -159,24 +159,24 @@ widgets["acAction"] = {
                                         if(value.split(" ")[k] == "up") {
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
                                                 req.value.value = parseInt(acs[acNames[j]].setTemp) + 1;
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else if(value.split(" ")[k] == "down") {
                                             //Attempt to lower the temp by 1
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
                                                 req.value.value = parseInt(acs[acNames[j]].setTemp) - 1;
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else {
@@ -189,7 +189,7 @@ widgets["acAction"] = {
                                         if(value.split(" ")[k] == "up") {
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
 
                                                 //Attempt to find the current mode
                                                 for(var l = 0; l < acs[acNames[j]].features.modes.length; l++) {
@@ -202,14 +202,14 @@ widgets["acAction"] = {
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else if(value.split(" ")[k] == "down") {
                                             //Attempt to lower the mode
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
 
                                                 //Attempt to find the current mode
                                                 for(var l = 0; l < acs[acNames[j]].features.modes.length; l++) {
@@ -222,7 +222,7 @@ widgets["acAction"] = {
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else {
@@ -235,7 +235,7 @@ widgets["acAction"] = {
                                         if(value.split(" ")[k] == "up") {
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
 
                                                 //Attempt to find the current mode
                                                 for(var l = 0; l < acs[acNames[j]].features.fans.length; l++) {
@@ -248,14 +248,14 @@ widgets["acAction"] = {
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else if(value.split(" ")[k] == "down") {
                                             //Attempt to lower the mode
                                             var acs;
                                             try {
-                                                acs = JSON.parse(sessionStorage.getItem("acValues"));
+                                                acs = JSON.parse(sessionStorage.getItem("ac-" + acName));
 
                                                 //Attempt to find the current mode
                                                 for(var l = 0; l < acs[acNames[j]].features.fans.length; l++) {
@@ -268,7 +268,7 @@ widgets["acAction"] = {
                                             }
                                             catch(e) {
                                                 displayInformation("Sorry could not do that because it's current state is unknown. Please try again", "warning");
-                                                requestStatus("acValues");
+                                                requestStatus("ac-" + acName);
                                             }
                                         }
                                         else {
@@ -306,7 +306,37 @@ widgets["acAction"] = {
             }
         }
     },
-    update: function(section, requiredInformation) {}
+    update: function(element, requiredInformation) {
+        //If a array is passed add them. If one item is passed add it
+        var elements = [];
+        try {
+            for(var i = 0; i < element.length; i++) {
+                elements.push(element[i]);
+            }
+        }
+        catch(e){elements.push(element);}
+
+        //Set default values
+        for(var i = 0; i < elements.length; i++) {
+            if(element[i].getAttribute("action") == "power") {
+                var acName = elements[i].getAttribute("acname");
+                try{
+                    acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
+                    if(acs[acName].power == "on") {
+                        elements[i].classList.remove("offColor");
+                        elements[i].classList.add("onColor");
+                        elements[i].innerHTML = "<i class='fas fa-toggle-on' style='font-size: 3em'></i>";
+                    }
+                    else if(acs[acName].power == "off") {
+                        elements[i].classList.add("offColor");
+                        elements[i].classList.remove("onColor");
+                        elements[i].innerHTML = "<i class='fas fa-toggle-off' style='font-size: 3em'></i>";
+                    }
+                }
+                catch(e) {}
+            }
+        }
+    }
 };
 
 widgets["acValue"] = {
@@ -331,11 +361,11 @@ widgets["acValue"] = {
 
             //If the clearOnRefresh flag is set clear the memory for this ac
             if(elements[i].getAttribute("clearOnRefresh") == "yes") {
-                if(sessionStorage.getItem("acValues") !== undefined && sessionStorage.getItem("acValues") !== null) {
+                if(sessionStorage.getItem("ac-" + acName) !== undefined && sessionStorage.getItem("ac-" + acName) !== null) {
                     //var acs = JSON.parse(sessionStorage.getItem("acValues"));
                     //delete acs[acName];
                     //sessionStorage.setItem("acValues", JSON.stringify(acs));
-                    sessionStorage.removeItem("acValues"); //A bit of a hack all ACs will need to be re-requested but it'll take too long to implement
+                    sessionStorage.removeItem("ac-" + acName); //A bit of a hack all ACs will need to be re-requested but it'll take too long to implement
                 }
             }
         }
@@ -365,7 +395,7 @@ widgets["acValue"] = {
                 var fan = "-";
                 var power = "-";
                 try{
-                    acs = JSON.parse(sessionStorage.getItem("acValues"));
+                    acs = {}; acs[acName] = JSON.parse(sessionStorage.getItem("ac-" + acName));
                     if(acName.split(" ").length > 1) {
                         //Loop though all the acs and check if the values are the same and set the value accordingly
                         var isSame = true;
@@ -409,7 +439,7 @@ widgets["acValue"] = {
                         power = acs[acName.split(" ")].power;
                     }
                 }
-                catch(e){addRequiredInformation("acValues", requiredInformation);};
+                catch(e){addRequiredInformation("ac-" + acName, requiredInformation);};
 
                 
                 switch(type.toLowerCase()) {
